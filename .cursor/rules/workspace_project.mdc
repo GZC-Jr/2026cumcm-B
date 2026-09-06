@@ -1,0 +1,28 @@
+---
+id: rule-cumcm-workspace-wide-development
+alwaysApply: true
+description: workspace-wide development, storage
+author: GZC-Jr
+---
+
+# CUMCM Workspace Guidelines
+
+本规则以 `2026cumcm/` 为工作区根目录；项目内路径使用相对路径。
+
+
+## Storage
+- `题目/` 存题目与原始附件材料；
+- `code/` 存放代码和实验脚本
+- `data/` 存放清洗干净的数据和缓存；
+- `docs/` 存放相关思路与说明文档，用于论文与代码编写；
+- `outputs/` 存放日志、评测和导出，用于后续可视化与进一步实验；
+- `paper/` 存放论文及相关文件；
+- `scratch/` 存放所有临时的文件与一次性脚本。
+
+## Git
+- 对目标仓库执行 Git 操作前，先运行 `git -C <repo> rev-parse --is-inside-work-tree`；提交前检查 `git -C <repo> status --short --branch` 和 `git -C <repo> diff --check`。Git 不替代数据与模型备份。
+
+## Verification and Handoff
+
+- 变更后运行与文件类型匹配的最小验证，例如 `bash -n <script>`、项目已有测试、配置解析或 `git -C <repo> diff --check`。验证命令不得泄露敏感值。
+- 对可能影响服务、流量或数据的变更，说明修改的相对路径、已执行的验证、结果、未验证项以及可用的回滚方式。没有验证条件时明确写出原因，不把推测当成结果。

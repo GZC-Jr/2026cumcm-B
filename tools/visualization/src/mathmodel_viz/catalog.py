@@ -1,0 +1,111 @@
+"""The single source of truth for supported mathematical-modeling visuals."""
+
+from __future__ import annotations
+
+from .models import VisualizationSpec, WorkflowStage as Stage
+
+
+def _spec(
+    identifier: str,
+    name: str,
+    category: str,
+    question: str,
+    shapes: tuple[str, ...],
+    stages: tuple[Stage, ...],
+    backends: tuple[str, ...],
+    interactive: bool,
+    note: str,
+) -> VisualizationSpec:
+    return VisualizationSpec(
+        id=identifier,
+        name=name,
+        category=category,
+        question=question,
+        data_shapes=shapes,
+        stages=stages,
+        backends=backends,
+        interactive=interactive,
+        note=note,
+    )
+
+
+CATEGORY_LABELS: dict[str, str] = {
+    "data-quality": "数据质量",
+    "distribution": "分布与统计",
+    "relationship": "关系与多变量",
+    "time-series": "时间序列与信号",
+    "spatial": "空间与地理",
+    "network-flow": "网络与流",
+    "function-geometry": "函数、几何与场",
+    "dynamics": "动力学与仿真",
+    "optimization": "优化与运筹",
+    "scheduling": "调度与排队",
+    "decision-risk": "决策、敏感性与风险",
+    "machine-learning": "机器学习与预测诊断",
+    "statistical-inference": "统计推断与模型诊断",
+    "communication": "报告与比较表达",
+}
+
+
+# Data-shape tags are deliberately few and composable. New recipes should reuse these
+# tags before adding a new one, so catalog queries remain stable over time.
+CATALOG: tuple[VisualizationSpec, ...] = (
+    _spec("quality-missingness", "缺失模式图", "data-quality", "缺失是否集中在变量、时间段或样本子群？", ("table", "missing-data"), (Stage.EXPLORE, Stage.VALIDATE), ("matplotlib", "seaborn", "plotly"), False, "先区分随机缺失与结构性缺失。"),
+    _spec("quality-outlier", "异常值诊断图", "data-quality", "哪些观测偏离合理范围或稳健统计量？", ("table", "series"), (Stage.EXPLORE, Stage.VALIDATE), ("seaborn", "matplotlib", "plotly"), False, "同时报告判定规则，不能只凭视觉删除样本。"),
+    _spec("quality-coverage", "样本覆盖图", "data-quality", "样本在时间、空间、类别或取值范围上是否覆盖充分？", ("table", "geo", "series"), (Stage.EXPLORE, Stage.VALIDATE), ("matplotlib", "plotly", "geopandas"), True, "适合在建模前暴露抽样偏差。"),
+    _spec("dist-histogram-kde", "直方图与密度曲线", "distribution", "变量的中心、离散、偏态和多峰结构是什么？", ("series", "table"), (Stage.EXPLORE, Stage.COMPARE), ("seaborn", "matplotlib", "plotly", "altair"), False, "分箱宽度会改变结论，建议与 ECDF 交叉检查。"),
+    _spec("dist-ecdf", "经验累积分布图", "distribution", "不同样本的整体分布和分位数差异是什么？", ("series", "table"), (Stage.EXPLORE, Stage.COMPARE, Stage.VALIDATE), ("seaborn", "matplotlib", "plotly"), False, "比 KDE 更少依赖平滑参数。"),
+    _spec("dist-box-violin", "箱线图、提琴图或雨云图", "distribution", "多个组的分布、离群点和不确定性如何比较？", ("table", "grouped-series"), (Stage.COMPARE, Stage.REPORT), ("seaborn", "matplotlib", "plotly"), False, "样本量很小时叠加原始点。"),
+    _spec("dist-qq-pp", "Q-Q 或 P-P 图", "distribution", "样本或残差是否符合目标分布？", ("series", "model-diagnostic"), (Stage.VALIDATE, Stage.EXPLAIN), ("statsmodels", "matplotlib"), False, "用于正态性、尾部偏离和分布拟合诊断。"),
+    _spec("rel-scatter", "散点图与回归线", "relationship", "两个连续变量是否关联、非线性或存在异方差？", ("table", "paired-series"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.VALIDATE), ("seaborn", "matplotlib", "plotly", "altair"), True, "点过密时改用 hexbin 或密度等高线。"),
+    _spec("rel-hexbin-density", "Hexbin、二维密度或等高线", "relationship", "高密度二维样本的联合分布和聚集区域在哪里？", ("table", "paired-series"), (Stage.EXPLORE, Stage.COMPARE), ("matplotlib", "seaborn", "plotly"), False, "避免大量点互相遮挡。"),
+    _spec("rel-pairplot", "散点矩阵", "relationship", "多变量间有哪些候选关系、尺度差异与异常群？", ("table", "multivariate"), (Stage.EXPLORE,), ("seaborn", "plotly"), True, "变量过多时先用相关热力图筛选。"),
+    _spec("rel-correlation-heatmap", "相关矩阵或聚类热力图", "relationship", "变量间的线性、秩相关或块状结构是什么？", ("matrix", "multivariate"), (Stage.EXPLORE, Stage.VALIDATE, Stage.REPORT), ("seaborn", "matplotlib", "plotly"), False, "相关不等于因果；建议同时展示样本量和显著性策略。"),
+    _spec("rel-parallel-coordinates", "平行坐标图", "relationship", "高维方案或样本在多个指标上的权衡是什么？", ("table", "multivariate"), (Stage.COMPARE, Stage.OPTIMIZE, Stage.EXPLAIN), ("plotly", "altair", "matplotlib"), True, "维度过多时需排序、归一化并控制线条数量。"),
+    _spec("ts-line-band", "时序折线与预测区间", "time-series", "指标如何随时间演化，预测误差或置信区间多大？", ("series", "forecast"), (Stage.EXPLORE, Stage.FORECAST, Stage.REPORT), ("matplotlib", "seaborn", "plotly", "altair"), True, "不确定性带应说明来源，例如预测区间或 bootstrap。"),
+    _spec("ts-decomposition", "趋势、季节与残差分解图", "time-series", "时序中的长期趋势、季节性和随机部分各占什么作用？", ("series",), (Stage.EXPLORE, Stage.FORECAST, Stage.VALIDATE), ("statsmodels", "matplotlib"), False, "STL 适用于检验季节结构和异常扰动。"),
+    _spec("ts-acf-pacf", "ACF/PACF 图", "time-series", "滞后相关结构如何，ARIMA 类模型应考虑哪些阶数？", ("series",), (Stage.EXPLORE, Stage.VALIDATE, Stage.FORECAST), ("statsmodels", "matplotlib"), False, "应与单位根或平稳性检验配套解释。"),
+    _spec("ts-lag", "滞后散点图", "time-series", "变量自身或两序列之间是否存在滞后关系？", ("series", "paired-series"), (Stage.EXPLORE, Stage.EXPLAIN), ("matplotlib", "seaborn", "plotly"), False, "适合寻找延迟效应与非线性记忆。"),
+    _spec("ts-calendar-heatmap", "日历热力图", "time-series", "周期性事件在日期和时段上如何分布？", ("series", "time-grid"), (Stage.EXPLORE, Stage.REPORT), ("matplotlib", "plotly"), True, "适用于日级或小时级数据。"),
+    _spec("ts-control-chart", "控制图", "time-series", "过程是否稳定，何时出现超出控制界限的异常？", ("series",), (Stage.VALIDATE, Stage.EXPLAIN), ("matplotlib", "plotly"), False, "控制界限不等同于业务规格界限。"),
+    _spec("geo-point", "点位图与比例符号图", "spatial", "观测、设施、事件或需求点在空间上如何分布？", ("geo", "point-set"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.REPORT), ("geopandas", "folium", "plotly"), True, "必须统一坐标参考系并防止点重叠误导。"),
+    _spec("geo-choropleth", "分级设色图", "spatial", "区域指标的空间差异、热点和冷点在哪里？", ("geo", "regional-table"), (Stage.EXPLORE, Stage.COMPARE, Stage.REPORT), ("geopandas", "plotly", "folium"), True, "使用标准化率而非绝对量，并注明分级方法。"),
+    _spec("geo-density", "空间核密度或六边形聚合图", "spatial", "点事件的密集区、服务盲区或采样偏差在哪里？", ("geo", "point-set"), (Stage.EXPLORE, Stage.OPTIMIZE), ("geopandas", "plotly", "folium"), True, "带宽或网格尺度应做敏感性检查。"),
+    _spec("geo-contour-raster", "栅格、等值线或表面图", "spatial", "连续空间变量的场强、边界和梯度是什么？", ("geo", "grid", "surface"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.REPORT), ("matplotlib", "cartopy", "pyvista"), False, "插值方法和空间分辨率必须可追溯。"),
+    _spec("geo-flow", "流向图与 OD 流图", "spatial", "人流、物流、交通或信息如何在地点间流动？", ("geo", "flow", "graph"), (Stage.EXPLORE, Stage.OPTIMIZE, Stage.EXPLAIN), ("plotly", "folium", "networkx"), True, "稠密 OD 需聚合，避免弧线遮挡。"),
+    _spec("net-node-link", "节点连线网络图", "network-flow", "网络的社团、枢纽、连通性和关键节点是什么？", ("graph",), (Stage.EXPLORE, Stage.EXPLAIN, Stage.OPTIMIZE), ("networkx", "plotly", "pyvis"), True, "布局只是展示手段，中心性指标应单独报告。"),
+    _spec("net-adjacency", "邻接矩阵图", "network-flow", "稠密网络、块结构或有序关系如何呈现？", ("graph", "matrix"), (Stage.EXPLORE, Stage.COMPARE), ("matplotlib", "seaborn", "plotly"), False, "对大网络通常比节点连线图更可读。"),
+    _spec("net-sankey", "桑基图或全流图", "network-flow", "资源、用户、货物或状态如何在阶段之间流转？", ("flow", "table"), (Stage.EXPLAIN, Stage.REPORT, Stage.OPTIMIZE), ("plotly", "matplotlib"), True, "只适合有限层级和可守恒的流量。"),
+    _spec("math-function-curve", "函数曲线与参数族", "function-geometry", "函数形状、根、极值和参数变化如何影响输出？", ("series", "function"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.VALIDATE), ("matplotlib", "plotly"), True, "把参数、定义域和单位写在图注或轴上。"),
+    _spec("math-contour-surface", "等高线、曲面或线框图", "function-geometry", "二元函数、损失面或势能面的高低和局部结构是什么？", ("grid", "surface", "function"), (Stage.EXPLORE, Stage.OPTIMIZE, Stage.EXPLAIN), ("matplotlib", "plotly", "pyvista"), True, "论文中优先等高线；三维图应避免遮挡。"),
+    _spec("math-vector-field", "向量场或流线图", "function-geometry", "速度、梯度、力或方向场在空间中如何变化？", ("grid", "vector-field"), (Stage.EXPLORE, Stage.EXPLAIN), ("matplotlib", "plotly", "pyvista"), True, "箭头密度应随网格规模调整。"),
+    _spec("math-mesh-volume", "网格、体渲染或切片图", "function-geometry", "三维几何、有限元结果或体数据的内部结构是什么？", ("mesh", "volume"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.REPORT), ("pyvista", "matplotlib", "plotly"), True, "建议同时提供可量化的切片或投影。"),
+    _spec("dyn-phase-plane", "相平面与零流线", "dynamics", "系统状态的平衡点、轨道和稳定性如何？", ("trajectory", "vector-field"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.VALIDATE), ("matplotlib", "plotly"), True, "与雅可比矩阵或稳定性分析对应。"),
+    _spec("dyn-trajectory", "状态轨迹与时空图", "dynamics", "多状态变量在仿真期间如何联动与传播？", ("trajectory", "series", "grid"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.VALIDATE), ("matplotlib", "plotly"), True, "同图最多保留能支持结论的状态变量。"),
+    _spec("dyn-bifurcation", "分岔图", "dynamics", "参数跨越阈值后系统稳态或周期行为如何改变？", ("parameter-sweep", "trajectory"), (Stage.EXPLORE, Stage.EXPLAIN), ("matplotlib", "plotly"), True, "需要明确稳定和不稳定支的编码方式。"),
+    _spec("dyn-spacetime", "时空热力图", "dynamics", "扩散、波动、传播或元胞状态如何随时空演变？", ("time-grid", "grid", "simulation"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.REPORT), ("matplotlib", "plotly"), True, "颜色范围必须在比较组之间固定。"),
+    _spec("opt-convergence", "收敛曲线", "optimization", "目标值、约束违反或梯度是否稳定收敛？", ("series", "optimization-log"), (Stage.OPTIMIZE, Stage.VALIDATE, Stage.REPORT), ("matplotlib", "plotly"), True, "多次随机运行应画中位数和分位带。"),
+    _spec("opt-pareto", "Pareto 前沿图", "optimization", "多目标方案之间有哪些不可支配权衡？", ("table", "multi-objective"), (Stage.OPTIMIZE, Stage.COMPARE, Stage.EXPLAIN), ("matplotlib", "plotly", "altair"), True, "二维或三维前沿之外可配合平行坐标图。"),
+    _spec("opt-feasible-region", "可行域与约束边界图", "optimization", "约束如何裁剪解空间，最优点位于哪里？", ("function", "constraint-set", "grid"), (Stage.OPTIMIZE, Stage.EXPLAIN, Stage.VALIDATE), ("matplotlib", "plotly"), False, "二维投影仅解释选定变量切片。"),
+    _spec("opt-sensitivity", "参数敏感性热力图", "optimization", "参数扰动对目标、约束或决策的影响有多大？", ("parameter-sweep", "matrix"), (Stage.OPTIMIZE, Stage.VALIDATE, Stage.EXPLAIN), ("matplotlib", "seaborn", "plotly"), True, "在结论中报告稳健区间而不只报告最优点。"),
+    _spec("opt-allocation", "分配矩阵或堆叠资源图", "optimization", "资源如何分配到对象、时段或场景，是否满足容量？", ("matrix", "allocation", "time-grid"), (Stage.OPTIMIZE, Stage.EXPLAIN, Stage.REPORT), ("matplotlib", "plotly"), True, "行列顺序和单位必须一致。"),
+    _spec("opt-route", "路径、巡回与线路图", "optimization", "路线方案、服务顺序和距离代价如何比较？", ("geo", "graph", "route"), (Stage.OPTIMIZE, Stage.COMPARE, Stage.EXPLAIN), ("networkx", "plotly", "folium"), True, "显示基线方案和总里程/时间，避免只画最终路径。"),
+    _spec("sched-gantt", "甘特图", "scheduling", "任务何时开始、持续多久，关键路径和重叠在哪里？", ("schedule", "interval"), (Stage.OPTIMIZE, Stage.EXPLAIN, Stage.REPORT), ("matplotlib", "plotly"), True, "资源和任务数量很多时按层级聚合。"),
+    _spec("sched-resource-load", "资源负荷图", "scheduling", "人员、机器或库存是否出现超载、闲置或瓶颈？", ("series", "schedule", "capacity"), (Stage.OPTIMIZE, Stage.VALIDATE, Stage.EXPLAIN), ("matplotlib", "plotly"), True, "同时标注容量线和超载时段。"),
+    _spec("sched-queue", "队长、等待时间与利用率图", "scheduling", "排队系统的拥堵、服务水平和资源利用如何变化？", ("series", "simulation"), (Stage.EXPLORE, Stage.OPTIMIZE, Stage.VALIDATE), ("matplotlib", "plotly"), True, "分开显示瞬时队长与累计统计量。"),
+    _spec("decision-tornado", "龙卷风图", "decision-risk", "哪些输入假设对结果最敏感？", ("sensitivity", "table"), (Stage.VALIDATE, Stage.EXPLAIN, Stage.REPORT), ("matplotlib", "plotly"), False, "各参数扰动范围必须在图中或图注中说明。"),
+    _spec("decision-scenario-fan", "情景扇形图", "decision-risk", "不同情景或随机模拟下的未来范围是什么？", ("forecast", "simulation", "series"), (Stage.FORECAST, Stage.VALIDATE, Stage.REPORT), ("matplotlib", "plotly"), True, "显示分位数带，避免把单一路径当作预测。"),
+    _spec("decision-ranking", "排名稳定性和权重敏感性图", "decision-risk", "多指标方案排序是否随着权重或情景变化而翻转？", ("table", "ranking", "parameter-sweep"), (Stage.COMPARE, Stage.VALIDATE, Stage.EXPLAIN), ("matplotlib", "plotly", "altair"), True, "适用于 AHP、TOPSIS、熵权法等决策模型。"),
+    _spec("ml-prediction-residual", "预测-观测与残差图", "machine-learning", "预测是否系统性偏高、偏低或随尺度变差？", ("paired-series", "model-diagnostic"), (Stage.VALIDATE, Stage.EXPLAIN, Stage.REPORT), ("matplotlib", "seaborn", "plotly", "sklearn"), True, "回归报告应至少含此图和误差分布。"),
+    _spec("ml-confusion", "混淆矩阵", "machine-learning", "分类错误集中在哪些类别，代价是否不对称？", ("matrix", "classification"), (Stage.VALIDATE, Stage.EXPLAIN, Stage.REPORT), ("sklearn", "matplotlib", "seaborn", "plotly"), False, "同时考虑原始计数与按真实类别归一化版本。"),
+    _spec("ml-roc-pr", "ROC、PR 与阈值曲线", "machine-learning", "二分类器在不同阈值下的召回、精确率和误报如何权衡？", ("classification", "score-series"), (Stage.VALIDATE, Stage.COMPARE, Stage.REPORT), ("sklearn", "matplotlib", "plotly"), True, "类别极不平衡时优先解读 PR 曲线。"),
+    _spec("ml-calibration", "校准曲线", "machine-learning", "预测概率是否与真实发生率一致？", ("classification", "probability"), (Stage.VALIDATE, Stage.EXPLAIN), ("sklearn", "matplotlib", "plotly"), False, "概率决策模型不应只报告 AUC。"),
+    _spec("ml-learning-curve", "学习曲线与验证曲线", "machine-learning", "误差受限于数据量、偏差还是方差，超参数是否稳健？", ("optimization-log", "model-diagnostic"), (Stage.VALIDATE, Stage.COMPARE, Stage.EXPLAIN), ("sklearn", "matplotlib", "plotly"), False, "训练/验证曲线需带交叉验证方差。"),
+    _spec("ml-feature-attribution", "特征重要性、SHAP 或 PDP/ICE", "machine-learning", "哪些特征驱动预测，方向和个体差异如何？", ("table", "model-diagnostic"), (Stage.EXPLAIN, Stage.VALIDATE, Stage.REPORT), ("shap", "sklearn", "matplotlib", "plotly"), True, "解释方法的相关性假设和因果边界要写清楚。"),
+    _spec("ml-embedding-cluster", "降维嵌入与聚类剖面图", "machine-learning", "样本群组是否分离，聚类结果与原始指标如何对应？", ("multivariate", "embedding", "table"), (Stage.EXPLORE, Stage.COMPARE, Stage.EXPLAIN), ("sklearn", "matplotlib", "plotly"), True, "二维嵌入用于探索，不能单独证明簇存在。"),
+    _spec("stats-forest", "森林图", "statistical-inference", "多个效应估计及其区间能否一致地比较？", ("table", "estimate-interval"), (Stage.COMPARE, Stage.EXPLAIN, Stage.REPORT), ("matplotlib", "plotly"), False, "适用于回归系数、分组效应与 meta 分析。"),
+    _spec("stats-residual-influence", "残差、杠杆值与影响点图", "statistical-inference", "模型假设是否违背，哪些样本过度影响估计？", ("model-diagnostic", "table"), (Stage.VALIDATE, Stage.EXPLAIN), ("statsmodels", "matplotlib"), False, "应结合 Cook 距离、杠杆值和业务核查。"),
+    _spec("stats-posterior-trace", "后验、轨迹和收敛诊断图", "statistical-inference", "贝叶斯采样是否收敛，后验不确定性是什么？", ("simulation", "parameter-samples"), (Stage.VALIDATE, Stage.EXPLAIN, Stage.REPORT), ("arviz", "matplotlib"), True, "与 R-hat、ESS 等数值诊断配套使用。"),
+    _spec("report-small-multiples", "小多图与共享尺度比较", "communication", "多个场景、地区、模型或指标能否在一致尺度下比较？", ("table", "series", "multivariate"), (Stage.COMPARE, Stage.REPORT), ("matplotlib", "seaborn", "plotly", "altair"), True, "共享轴范围，避免每个面板自行缩放。"),
+    _spec("report-table-heatmap", "注释表格或决策热力图", "communication", "有限的候选方案与关键指标如何精确对比？", ("table", "matrix"), (Stage.COMPARE, Stage.REPORT), ("pandas", "seaborn", "plotly"), True, "精确数值优先表格；颜色只能辅助，不能替代数字。"),
+)
