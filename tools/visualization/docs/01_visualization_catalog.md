@@ -16,7 +16,7 @@
 |---|---|---|---|
 | 数据质量 | 数据能否进入模型，偏差来自哪里？ | 缺失矩阵/UpSet、异常值图、覆盖图、范围图、重复记录与采样频数图 | `quality-missingness`、`quality-outlier`、`quality-coverage` |
 | 分布与统计 | 中心、离散、偏态、多峰与分位数如何？ | 直方图、核密度、ECDF、箱线图、提琴图、雨云图、点图、岭线图、Q-Q/P-P 图 | `dist-histogram-kde`、`dist-ecdf`、`dist-box-violin`、`dist-qq-pp` |
-| 关系与多变量 | 变量是否相关、非线性、交互或分群？ | 散点/气泡图、回归线、hexbin、二维密度、散点矩阵、相关热力图、聚类热力图、平行坐标、马赛克图 | `rel-scatter`、`rel-hexbin-density`、`rel-pairplot`、`rel-correlation-heatmap`、`rel-parallel-coordinates` |
+| 关系与多变量 | 变量是否相关、非线性、交互或分群？ | 散点/气泡图、六边形密度、二维密度、散点矩阵、相关热力图、聚类热力图、平行坐标、马赛克图 | `rel-scatter`、`rel-hexbin-density`、`rel-pairplot`、`rel-correlation-heatmap`、`rel-parallel-coordinates` |
 | 时间序列与信号 | 趋势、季节、突变、滞后与预测区间是什么？ | 折线/阶梯图、置信带、分解图、ACF/PACF、滞后散点、季节子序列、日历热力图、控制图、频谱/小波图 | `ts-line-band`、`ts-decomposition`、`ts-acf-pacf`、`ts-lag`、`ts-calendar-heatmap`、`ts-control-chart` |
 | 空间与地理 | 事件、需求、风险或资源在何处聚集和流动？ | 点位/比例符号图、分级设色图、核密度、六边形聚合、栅格、等值线、流向/OD 图、可达性图 | `geo-point`、`geo-choropleth`、`geo-density`、`geo-contour-raster`、`geo-flow` |
 | 网络与流 | 谁与谁相连，流量如何穿过系统？ | 节点连线图、邻接矩阵、弦图、桑基/全流图、树图、社区着色图、网络指标分布图 | `net-node-link`、`net-adjacency`、`net-sankey` |

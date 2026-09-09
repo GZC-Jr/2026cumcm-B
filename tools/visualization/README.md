@@ -18,13 +18,36 @@ mathmodel-viz list --stage optimize
 mathmodel-viz recommend --stage forecast --shape series --mode static
 python examples/quickstart.py
 
-# The gallery includes the optional ML diagnostic panel
+# 图库包含机器学习诊断面板（可选依赖）
 python -m pip install -e ".[model-diagnostics]"
-# Generate a multi-category test gallery in a chosen output directory
+# 在指定目录生成跨类别测试图库
 python examples/chart_gallery.py --output "..\..\scratch\vis-test"
 ```
 
 `quickstart.py` 会在 `outputs/figures/visualization-demo/` 创建一个演示图。真实建模项目应把结果写入仓库根目录的 `outputs/figures/<模型或实验名>/`，而不是写入本工具目录。
+
+## 全局主题
+
+所有示例和可复用图形都从 `mathmodel_viz.styles` 读取统一主题。中文字体使用宋体（`SimSun`），英文与数字优先使用 `Times New Roman`；Matplotlib、Seaborn 和 Plotly 的颜色循环、网格、色图与交互模板也由同一处配置。
+
+默认颜色为：主红 `#B41B20`、主蓝 `#266AA0`、过渡色 `#EF8F67`，辅助色 `#FFE181`。需求中的五位写法 `#B41B2` 和 `#266AA` 不是标准十六进制颜色，工具会在末尾补 `0`，分别规范化为 `#B41B20` 和 `#266AA0`。
+
+在项目入口处配置一次即可让后续图形跟随新配色：
+
+```python
+from mathmodel_viz import configure_matplotlib, configure_theme, get_theme
+
+configure_theme(
+    primary_red="#B41B2",
+    primary_blue="#266AA",
+    transition="#EF8F67",
+    auxiliary="#FFE181",
+)
+configure_matplotlib()
+theme = get_theme()
+```
+
+绘图代码应使用 `theme.primary_red`、`theme.primary_blue`、`theme.transition`、`theme.auxiliary`，或使用 `theme.color(name, alpha)` / `theme.css_color(name, alpha)` 获取透明度变体；连续色图使用 `theme.colormap()` 或 `theme.plotly_colorscale()`。这样只修改 `configure_theme()` 的参数就能整体换色，不会引入未登记的默认色。
 
 可选能力按场景安装，避免默认环境变得臃肿：
 

@@ -58,7 +58,7 @@ CATALOG: tuple[VisualizationSpec, ...] = (
     _spec("dist-box-violin", "箱线图、提琴图或雨云图", "distribution", "多个组的分布、离群点和不确定性如何比较？", ("table", "grouped-series"), (Stage.COMPARE, Stage.REPORT), ("seaborn", "matplotlib", "plotly"), False, "样本量很小时叠加原始点。"),
     _spec("dist-qq-pp", "Q-Q 或 P-P 图", "distribution", "样本或残差是否符合目标分布？", ("series", "model-diagnostic"), (Stage.VALIDATE, Stage.EXPLAIN), ("statsmodels", "matplotlib"), False, "用于正态性、尾部偏离和分布拟合诊断。"),
     _spec("rel-scatter", "散点图与回归线", "relationship", "两个连续变量是否关联、非线性或存在异方差？", ("table", "paired-series"), (Stage.EXPLORE, Stage.EXPLAIN, Stage.VALIDATE), ("seaborn", "matplotlib", "plotly", "altair"), True, "点过密时改用 hexbin 或密度等高线。"),
-    _spec("rel-hexbin-density", "Hexbin、二维密度或等高线", "relationship", "高密度二维样本的联合分布和聚集区域在哪里？", ("table", "paired-series"), (Stage.EXPLORE, Stage.COMPARE), ("matplotlib", "seaborn", "plotly"), False, "避免大量点互相遮挡。"),
+    _spec("rel-hexbin-density", "六边形密度、二维密度或等高线", "relationship", "高密度二维样本的联合分布和聚集区域在哪里？", ("table", "paired-series"), (Stage.EXPLORE, Stage.COMPARE), ("matplotlib", "seaborn", "plotly"), False, "避免大量点互相遮挡。"),
     _spec("rel-pairplot", "散点矩阵", "relationship", "多变量间有哪些候选关系、尺度差异与异常群？", ("table", "multivariate"), (Stage.EXPLORE,), ("seaborn", "plotly"), True, "变量过多时先用相关热力图筛选。"),
     _spec("rel-correlation-heatmap", "相关矩阵或聚类热力图", "relationship", "变量间的线性、秩相关或块状结构是什么？", ("matrix", "multivariate"), (Stage.EXPLORE, Stage.VALIDATE, Stage.REPORT), ("seaborn", "matplotlib", "plotly"), False, "相关不等于因果；建议同时展示样本量和显著性策略。"),
     _spec("rel-parallel-coordinates", "平行坐标图", "relationship", "高维方案或样本在多个指标上的权衡是什么？", ("table", "multivariate"), (Stage.COMPARE, Stage.OPTIMIZE, Stage.EXPLAIN), ("plotly", "altair", "matplotlib"), True, "维度过多时需排序、归一化并控制线条数量。"),

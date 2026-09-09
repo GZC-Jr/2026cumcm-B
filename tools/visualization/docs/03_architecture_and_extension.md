@@ -29,6 +29,14 @@ tools/visualization/src/mathmodel_viz/
 
 `docs/` 解释选择理由，`examples/` 只展示如何调用公共 API，`tests/` 验证契约。三者都不保存可复用的业务实现。
 
+## 全局字体与颜色主题
+
+`styles.py` 是字体和颜色的唯一入口。调用 `configure_matplotlib()` 会同时设置 Matplotlib/Seaborn 的字体、颜色循环、背景和网格；安装 Plotly 时还会注册同名的 `mathmodel` 模板。中文字体固定优先使用宋体（`SimSun`），英文与数字优先使用 `Times New Roman`，缺少字体时才沿用 Matplotlib 的回退机制。
+
+主题由 `VisualizationTheme` 管理，默认主色为主红 `#B41B20`、主蓝 `#266AA0`、过渡色 `#EF8F67`，辅助色为 `#FFE181`。图形 recipe 不应直接写 `tab:*`、灰度字面量或第三方色图；应使用 `get_theme()` 返回的颜色、透明度变体和 `colormap()`。项目入口可以通过 `configure_theme(...)` 一次修改全局配色，后续静态和交互图会读取同一套颜色。
+
+原始需求中的 `#B41B2`、`#266AA` 只有五位十六进制数字，工具在 `normalize_hex_color()` 中统一追加末位 `0`，保证传给 Matplotlib 和 Plotly 的值始终是合法的 `#RRGGBB` 或 `#RRGGBBAA`。
+
 ## 为什么不是“一堆绘图脚本”
 
 一个典型的冗余模式是：每个模型脚本各自写 `rcParams`、中文字体、颜色、`savefig`、文件夹创建和散点图函数。短期很快，长期会出现图形样式漂移、路径不一致和难以改动的问题。

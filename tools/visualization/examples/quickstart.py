@@ -7,7 +7,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathmodel_viz import configure_matplotlib, save_figure
+from mathmodel_viz import configure_matplotlib, get_theme, save_figure
 
 
 def build_demo(output_dir: Path) -> Path:
@@ -17,19 +17,21 @@ def build_demo(output_dir: Path) -> Path:
     residual = predicted - observed
 
     configure_matplotlib()
+    theme = get_theme()
     figure, axes = plt.subplots(1, 2, figsize=(10, 4))
 
-    axes[0].scatter(observed, predicted, alpha=0.75, label="observations")
+    axes[0].scatter(observed, predicted, color=theme.primary_blue, alpha=0.75, label="观测样本")
     lower, upper = min(observed.min(), predicted.min()), max(observed.max(), predicted.max())
-    axes[0].plot([lower, upper], [lower, upper], "--", color="tab:red", label="ideal")
-    axes[0].set(title="Prediction vs. observation", xlabel="Observed", ylabel="Predicted")
+    axes[0].plot([lower, upper], [lower, upper], "--", color=theme.primary_red, label="理想线")
+    axes[0].set(title="预测值与观测值", xlabel="观测值", ylabel="预测值")
     axes[0].legend()
 
-    axes[1].axhline(0, color="tab:red", linestyle="--", linewidth=1)
-    axes[1].scatter(predicted, residual, alpha=0.75)
-    axes[1].set(title="Residual diagnostic", xlabel="Predicted", ylabel="Residual")
+    axes[1].axhline(0, color=theme.foreground, linestyle="--", linewidth=1)
+    axes[1].scatter(predicted, residual, color=theme.transition, alpha=0.75, label="残差")
+    axes[1].set(title="残差诊断", xlabel="预测值", ylabel="残差")
+    axes[1].legend()
 
-    figure.suptitle("Regression diagnostic example")
+    figure.suptitle("回归诊断示例")
     figure.tight_layout()
     return save_figure(figure, output_dir / "regression_diagnostic.png")
 
