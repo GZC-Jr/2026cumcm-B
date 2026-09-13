@@ -17,7 +17,7 @@ from matplotlib.ticker import FuncFormatter
 
 # 导入全局主题配置
 import sys
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tools" / "visualization" / "src"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "tools" / "visualization" / "src"))
 from mathmodel_viz.styles import (
     configure_matplotlib,
     get_theme,
@@ -43,7 +43,7 @@ SIGMA_THETA = np.deg2rad(1.0)
 TAU = 0.12
 EPSILON_W = 0.18
 P_W = 2.0
-OUTPUT = Path("../../outputs/t3/dop_advantage_visualization.png")
+OUTPUT = Path("dop_advantage_visualization.png")
 
 
 def make_target_samples(mean: np.ndarray, a: float, b: float):
@@ -196,8 +196,8 @@ def main() -> None:
         spatial_legend.append(Line2D([0], [0], marker=marker, color="none",
                                      markerfacecolor=color, markeredgecolor="white",
                                      markersize=9, label=label))
-    ax.legend(handles=spatial_legend, loc="lower center", bbox_to_anchor=(0.5, -0.27),
-              ncol=2, frameon=False, fontsize=8.6)
+    ax.legend(handles=spatial_legend, loc="lower center", bbox_to_anchor=(0.5, -0.2),
+              ncol=4, frameon=False, fontsize=7.8)
 
     # -------------------- B. 时间—DOP 权衡 --------------------
     ax = axes[1]

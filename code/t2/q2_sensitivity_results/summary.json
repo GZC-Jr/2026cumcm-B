@@ -1,0 +1,51 @@
+{
+  "scenario": {
+    "S1": [
+      0,
+      0
+    ],
+    "bearing_deg": 0,
+    "angle_error_deg": 1,
+    "target_radius_m": 1800,
+    "effective_radius_upper_m": 1500
+  },
+  "baseline": {
+    "epsilon_w": 0.3,
+    "p_w": 2.0,
+    "tau": 0.05,
+    "x_star_m": 863.3895682985542,
+    "y_star_m": 504.53786116924493,
+    "L_star_m": 1000.0,
+    "beta_star_deg": 30.300679363267708,
+    "J_star_m": 1580.6583557041383,
+    "success": true,
+    "J0_m": 1580.6583557041383
+  },
+  "epsilon_sweep": {
+    "range": [
+      0.1,
+      0.5
+    ],
+    "beta_change_deg": 0.7116800150631022,
+    "distance_change_m": 0.0,
+    "J0_relative_range_pct": 0.009947094038964543
+  },
+  "p_sweep": {
+    "range": [
+      1.0,
+      3.0
+    ],
+    "beta_change_deg": 0.4378282109379512,
+    "distance_change_m": 0.0,
+    "J0_relative_range_pct": 0.0019764214564066407
+  },
+  "tau_sweep": {
+    "range": [
+      0.01,
+      0.2
+    ],
+    "area_at_1pct_m2": 2778.402564614589,
+    "area_at_20pct_m2": 177112.76738410332,
+    "area_multiplier": 63.74625824198079
+  }
+}

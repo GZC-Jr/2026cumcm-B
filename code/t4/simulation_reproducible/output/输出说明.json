@@ -1,0 +1,17 @@
+{
+  "交付结构": "每题汇总表CSV及PNG，另有三张统计图",
+  "数据来源": {
+    "Q3": "C:\\Users\\GZC\\Desktop\\2026cumcm\\code\\t4\\simulation_reproducible\\Q3\\results\\cases.csv",
+    "Q4": "C:\\Users\\GZC\\Desktop\\2026cumcm\\code\\t4\\simulation_reproducible\\Q4\\results\\cases.csv"
+  },
+  "案例数": {
+    "Q3": 300,
+    "Q4": 300
+  },
+  "时间构成完整": {
+    "Q3": true,
+    "Q4": true
+  },
+  "时间核算": "移动=距离/5；切换=次数；检测=5×次数；清除=5×成功次数+3×失败次数",
+  "平均口径": "单源平均时间先按每局已清除源数量计算，再对局取算术平均；无已清除源时记空值并排除。"
+}

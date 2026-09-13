@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Bone</title>
+  <desc id="desc">A simple four-knob bone silhouette on a transparent background.</desc>
+  <path
+    fill="#111827"
+    transform="rotate(-42 128 128)"
+    d="M71 109c-8-8-8-20 0-28 8-8 20-8 28 0h59c8-8 20-8 28 0 8 8 8 20 0 28 8 8 8 20 0 28-8 8-20 8-28 0H99c-8 8-20 8-28 0-8-8-8-20 0-28Z" />
+</svg>
