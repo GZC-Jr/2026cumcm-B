@@ -1,0 +1,2 @@
+﻿experiment,grid_size,tau,threshold,cell_center_area,marching_area,accepted_cell_count,contour_count,closed_contour_count,open_contour_count,boundary_length,finite_node_count,reception_feasible_node_count
+candidate_grid,31,0.05,2074.3163280176323,231326.9783140414,186353.5926771872,52,2,2,0,3132.2316058100064,941,270

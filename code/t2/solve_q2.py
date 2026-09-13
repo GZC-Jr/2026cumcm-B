@@ -19,7 +19,7 @@ described in ``docs/问题二求解思路.md``:
 
 Example::
 
-    python solve_q2.py --demo --output ../../outputs/t2_demo_result.json
+    python solve_q2.py --demo --output ../../outputs/t2/t2_demo_result.json
 
 JSON input accepts either::
 
@@ -469,6 +469,64 @@ class Question2Model:
             ),
         ]
 
+        # The reception oracle is evaluated thousands of times when a
+        # marching-squares boundary or a Monte-Carlo diagnostic is requested.
+        # Vertices and polygon/circle intersection points are independent of
+        # the candidate detector position, so cache them once.  The only
+        # position-dependent support point is added by ``receive_h`` below.
+        (
+            self._reception_static_inner,
+            self._reception_static_outer,
+        ) = self._build_reception_static_candidates()
+
+    def _build_reception_static_candidates(self) -> tuple[np.ndarray, np.ndarray]:
+        """Return unique polygon/circle extreme points used by ``H(P)``.
+
+        For the inner disk part and the outer affine part of the separation
+        oracle, extrema occur at polygon vertices, intersections with the
+        radius-``min_receive_radius`` circle, or the circle support point.
+        The support point depends on ``P`` and is therefore handled at query
+        time; all other points are cached here.
+        """
+
+        points: list[np.ndarray] = [np.asarray(vertex, dtype=float) for vertex in self.region.vertices]
+        for first, second in zip(self.region.vertices, np.roll(self.region.vertices, -1, axis=0)):
+            points.extend(
+                _segment_circle_intersections(
+                    first,
+                    second,
+                    self.s1,
+                    self.config.min_receive_radius,
+                )
+            )
+        unique: list[np.ndarray] = []
+        for point in points:
+            if not _point_inside(self.region, point, 5e-7):
+                continue
+            if not any(np.linalg.norm(point - prior) <= 1e-7 for prior in unique):
+                unique.append(np.asarray(point, dtype=float))
+        if not unique:
+            unique.append(self.region.centroid.copy())
+        radius = self.config.min_receive_radius
+        inner = [
+            point
+            for point in unique
+            if float(np.linalg.norm(point - self.s1)) <= radius + 1e-7
+        ]
+        outer = [
+            point
+            for point in unique
+            if float(np.linalg.norm(point - self.s1)) >= radius - 1e-7
+        ]
+        # Circle intersections belong to both pieces.  A full-dimensional
+        # polygon has at least one candidate in each piece; retain a centroid
+        # fallback only for defensive handling of degenerate numerical input.
+        if not inner:
+            inner = [self.region.centroid.copy()]
+        if not outer:
+            outer = [self.region.centroid.copy()]
+        return np.asarray(inner, dtype=float), np.asarray(outer, dtype=float)
+
     def _quadrature_data(self, order: int) -> dict[str, Any]:
         """Build and cache integration data for one quadrature order."""
 
@@ -568,25 +626,96 @@ class Question2Model:
         point_array = np.asarray(point, dtype=float)
         if point_array.shape != (2,) or not np.all(np.isfinite(point_array)):
             return math.inf
-        inner, outer = self._reception_candidates(point_array)
+        # Evaluate the cached extreme points in one vector operation.  Each
+        # point carries the correct piecewise radius ``max(r0,||G-S1||)``;
+        # this is algebraically identical to the previous inner/outer list
+        # implementation and is substantially faster for dense grids.
         radius_sq = self.config.min_receive_radius**2
-        values: list[float] = []
-        for target in inner:
-            distance_sq = float(np.sum((point_array - target) ** 2))
-            values.append(distance_sq - radius_sq)
-        for target in outer:
-            distance_sq = float(np.sum((point_array - target) ** 2))
-            target_radius_sq = float(np.sum((target - self.s1) ** 2))
-            values.append(distance_sq - target_radius_sq)
-        if not values:
-            # A full-dimensional polygon always has at least one of the two
-            # parts; this branch is only a defensive numerical fallback.
+        inner = self._reception_static_inner
+        outer = self._reception_static_outer
+        inner_values = np.einsum(
+            "ij,ij->i", inner - point_array[None, :], inner - point_array[None, :]
+        ) - radius_sq
+        outer_radius_sq = np.einsum(
+            "ij,ij->i", outer - self.s1[None, :], outer - self.s1[None, :]
+        )
+        outer_values = np.einsum(
+            "ij,ij->i", outer - point_array[None, :], outer - point_array[None, :]
+        ) - outer_radius_sq
+        best = float(max(np.max(inner_values), np.max(outer_values)))
+
+        # The support point of the radius-r0 circle is the only extreme point
+        # that changes with P.  It contributes when it lies in the target
+        # polygon.  Include it with the same piecewise radius expression.
+        direction = point_array - self.s1
+        norm = float(np.linalg.norm(direction))
+        if norm > 1e-12:
+            support = self.s1 - self.config.min_receive_radius * direction / norm
+            if _point_inside(self.region, support, 2e-8):
+                support_value = float(np.sum((point_array - support) ** 2) - radius_sq)
+                best = max(best, support_value)
+        if not math.isfinite(best):
+            # A full-dimensional polygon always has at least one extreme
+            # point; retain a defensive fallback for malformed input.
             target = self.region.centroid
-            return float(
+            best = float(
                 np.sum((point_array - target) ** 2)
                 - max(radius_sq, np.sum((target - self.s1) ** 2))
             )
-        return float(max(values))
+        return best
+
+    def receive_h_many(self, points: Sequence[Sequence[float]] | np.ndarray) -> np.ndarray:
+        """Vectorised separation-oracle values for a batch of detector points.
+
+        The returned array has one value per row of ``points``.  Invalid rows
+        receive ``+inf``.  Static extrema are evaluated by matrix products;
+        the dynamic circle support point is handled in a small vector loop.
+        This method is intended for grid diagnostics and does not alter the
+        scalar oracle used by the optimiser.
+        """
+
+        array = np.asarray(points, dtype=float)
+        if array.ndim == 1:
+            if array.shape != (2,):
+                raise ValueError("points must have shape (n, 2)")
+            array = array.reshape(1, 2)
+        if array.ndim != 2 or array.shape[1] != 2:
+            raise ValueError("points must have shape (n, 2)")
+        result = np.full(len(array), math.inf, dtype=float)
+        valid = np.all(np.isfinite(array), axis=1)
+        if not np.any(valid):
+            return result
+        query = array[valid]
+        radius_sq = self.config.min_receive_radius**2
+        inner = self._reception_static_inner
+        outer = self._reception_static_outer
+        # ||P-G||^2-r(G)^2 = ||P||^2 - 2 P.G + ||G||^2-r(G)^2.
+        query_sq = np.einsum("ij,ij->i", query, query)
+        inner_sq_minus_r = np.einsum("ij,ij->i", inner, inner) - radius_sq
+        outer_radius_sq = np.einsum(
+            "ij,ij->i", outer - self.s1[None, :], outer - self.s1[None, :]
+        )
+        outer_sq_minus_r = np.einsum("ij,ij->i", outer, outer) - outer_radius_sq
+        inner_values = query_sq[:, None] - 2.0 * (query @ inner.T) + inner_sq_minus_r[None, :]
+        outer_values = query_sq[:, None] - 2.0 * (query @ outer.T) + outer_sq_minus_r[None, :]
+        best = np.maximum(np.max(inner_values, axis=1), np.max(outer_values, axis=1))
+
+        directions = query - self.s1[None, :]
+        norms = np.linalg.norm(directions, axis=1)
+        support_valid = norms > 1e-12
+        if np.any(support_valid):
+            support = np.zeros_like(query)
+            support[support_valid] = self.s1[None, :] - self.config.min_receive_radius * directions[support_valid] / norms[support_valid, None]
+            inside = np.zeros(len(query), dtype=bool)
+            for index, candidate in enumerate(support):
+                if support_valid[index]:
+                    inside[index] = _point_inside(self.region, candidate, 2e-8)
+            if np.any(inside):
+                delta = query[inside] - support[inside]
+                support_values = np.einsum("ij,ij->i", delta, delta) - radius_sq
+                best[inside] = np.maximum(best[inside], support_values)
+        result[valid] = best
+        return result
 
     def reception_h_tolerance(self) -> float:
         """Return the numerical H tolerance used for feasibility acceptance.
@@ -705,6 +834,99 @@ class Question2Model:
         value = float(np.sum(quad_weights * weights * dop) / normalization)
         return value if math.isfinite(value) else math.inf
 
+    def objective_many(
+        self,
+        points: Sequence[Sequence[float]] | np.ndarray,
+        epsilon_w: float | None = None,
+        p_w: float | None = None,
+        quadrature_order: int | None = None,
+        *,
+        chunk_size: int = 512,
+    ) -> np.ndarray:
+        """Evaluate ``J(P)`` for many detector points.
+
+        This is the batch counterpart of :meth:`objective`, used by
+        convergence tables and marching-squares extraction.  It preserves the
+        scalar method's explicit ``+inf`` treatment of collinear points and
+        singular quadrature nodes.  ``chunk_size`` bounds temporary memory for
+        high-resolution grids.
+        """
+
+        array = np.asarray(points, dtype=float)
+        if array.ndim == 1:
+            if array.shape != (2,):
+                raise ValueError("points must have shape (n, 2)")
+            array = array.reshape(1, 2)
+        if array.ndim != 2 or array.shape[1] != 2:
+            raise ValueError("points must have shape (n, 2)")
+        try:
+            chunk = max(1, _finite_int(chunk_size, "chunk_size"))
+        except ValueError as exc:
+            raise ValueError("chunk_size must be a positive integer") from exc
+        result = np.full(len(array), math.inf, dtype=float)
+        if len(array) == 0:
+            return result
+        order = self.quadrature_order if quadrature_order is None else _finite_int(
+            quadrature_order, "quadrature_order"
+        )
+        data = self._quadrature_data(order)
+        nodes = data["nodes"]
+        quad_weights = data["quad_weights"]
+        r1_vectors = data["r1_vectors"]
+        r1_sq = data["r1_sq"]
+        r1 = data["r1"]
+        weights = self._weights(epsilon_w, p_w, data["depth_quantiles"])
+        normalization = float(np.sum(quad_weights * weights))
+        if normalization <= 0 or not math.isfinite(normalization):
+            return result
+        valid_finite = np.all(np.isfinite(array), axis=1)
+        if not np.any(valid_finite):
+            return result
+        # The line/polygon test is intentionally kept scalar: it is a cheap
+        # robust half-plane interval calculation and avoids changing the
+        # singularity semantics of the public objective.
+        valid_geometry = np.zeros(len(array), dtype=bool)
+        for index in np.flatnonzero(valid_finite):
+            valid_geometry[index] = self.geometry_is_finite(array[index])
+        valid_indices = np.flatnonzero(valid_geometry)
+        if not len(valid_indices):
+            return result
+        for start in range(0, len(valid_indices), chunk):
+            indices = valid_indices[start : start + chunk]
+            query = array[indices]
+            vectors_2 = nodes[None, :, :] - query[:, None, :]
+            r2_sq = np.einsum("mij,mij->mi", vectors_2, vectors_2)
+            r2 = np.sqrt(r2_sq)
+            determinants = np.abs(
+                r1_vectors[None, :, 0] * vectors_2[:, :, 1]
+                - r1_vectors[None, :, 1] * vectors_2[:, :, 0]
+            )
+            denominator = r1[None, :] * r2
+            with np.errstate(divide="ignore", invalid="ignore", over="ignore"):
+                sine = np.divide(
+                    determinants,
+                    denominator,
+                    out=np.zeros_like(denominator),
+                    where=denominator > 0,
+                )
+                finite_rows = np.all(
+                    np.isfinite(sine) & (sine > self.config.angle_sin_tolerance),
+                    axis=1,
+                )
+                dop = np.divide(
+                    r1[None, :] * r2 * np.sqrt(r1_sq[None, :] + r2_sq),
+                    determinants,
+                    out=np.full_like(determinants, math.inf),
+                    where=determinants > 0,
+                )
+            finite_rows &= np.all(np.isfinite(dop), axis=1)
+            if np.any(finite_rows):
+                numerators = np.sum(dop[finite_rows] * (quad_weights * weights)[None, :], axis=1)
+                values = numerators / normalization
+                good = np.isfinite(values)
+                result[indices[finite_rows][good]] = values[good]
+        return result
+
     def constrained_objective(self, point: Sequence[float] | np.ndarray) -> float:
         """Finite objective used by global and local numerical optimizers.
 
@@ -753,17 +975,30 @@ class Question2Model:
                 clipped.append(point)
         return clipped
 
-    def optimize(self) -> dict[str, Any]:
-        """Run global penalized search followed by constrained local polishing."""
+    def optimize(
+        self,
+        *,
+        seed: int | None = None,
+        max_local_starts: int | None = None,
+        starts: Sequence[Sequence[float]] | None = None,
+    ) -> dict[str, Any]:
+        """Run global penalized search followed by constrained local polishing.
 
-        rng = np.random.default_rng(self.config.seed)
+        ``seed`` and ``max_local_starts`` are optional experiment controls;
+        omitting them retains the original deterministic configuration.  A
+        caller may also provide explicit ``starts`` to audit separate
+        optimisation branches without changing the production defaults.
+        """
+
+        run_seed = self.config.seed if seed is None else _finite_int(seed, "seed")
+        rng = np.random.default_rng(run_seed)
         candidates: list[tuple[float, np.ndarray, str]] = []
         global_result: Any = None
         if self.config.use_global_search:
             global_result = differential_evolution(
                 self.constrained_objective,
                 self.search_bounds,
-                seed=self.config.seed,
+                seed=run_seed,
                 maxiter=self.config.global_maxiter,
                 popsize=self.config.global_popsize,
                 polish=False,
@@ -779,7 +1014,39 @@ class Question2Model:
             )
             if global_feasible:
                 candidates.append((global_value, global_point, "global"))
-        starts = self._candidate_starts(rng)
+        if starts is None:
+            starts_list = self._candidate_starts(rng)
+        else:
+            starts_list = []
+            lower = np.asarray([self.search_bounds[0][0], self.search_bounds[1][0]])
+            upper = np.asarray([self.search_bounds[0][1], self.search_bounds[1][1]])
+            for start in starts:
+                point = np.asarray(start, dtype=float)
+                if point.shape != (2,) or not np.all(np.isfinite(point)):
+                    continue
+                starts_list.append(np.clip(point, lower, upper))
+            if not starts_list:
+                starts_list = self._candidate_starts(rng)
+        if max_local_starts is not None:
+            requested = _finite_int(max_local_starts, "max_local_starts")
+            if requested < 1:
+                raise ValueError("max_local_starts must be positive")
+            # Preserve the centroid, incenter, and a balanced angular subset
+            # before filling the remaining slots.  This keeps both symmetric
+            # branches represented in low-cost convergence audits.
+            if len(starts_list) > requested:
+                keep: list[np.ndarray] = []
+                preferred = starts_list[:2]
+                keep.extend(preferred[:requested])
+                remaining = starts_list[2:]
+                if requested > len(keep):
+                    stride = max(1, len(remaining) // max(1, requested - len(keep)))
+                    for candidate in remaining[::stride]:
+                        if len(keep) >= requested:
+                            break
+                        keep.append(candidate)
+                starts_list = keep[:requested]
+        starts = starts_list
         if global_result is not None:
             starts.insert(0, np.asarray(global_result.x, dtype=float))
         scale = max(1.0, self.search_radius**2)
@@ -817,6 +1084,7 @@ class Question2Model:
                     ),
                     "feasible": feasible,
                     "iterations": int(getattr(result, "nit", 0) or 0),
+                    "function_evaluations": int(getattr(result, "nfev", 0) or 0),
                 }
             )
             if feasible:
@@ -879,6 +1147,17 @@ class Question2Model:
             )
         best_value, best_point, source = min(feasible_candidates, key=lambda item: item[0])
         best_point = np.asarray(best_point, dtype=float)
+        selected_local_run: dict[str, Any] | None = None
+        if source == "local":
+            matching_runs = [
+                run
+                for run in local_results
+                if math.isfinite(float(run["objective"]))
+                and np.linalg.norm(np.asarray(run["point"], dtype=float) - best_point) <= 1e-7
+                and abs(float(run["objective"]) - best_value) <= 1e-7
+            ]
+            if matching_runs:
+                selected_local_run = matching_runs[0]
         bearing_from_s1 = math.degrees(math.atan2(best_point[1] - self.s1[1], best_point[0] - self.s1[0])) % 360.0
         bearing_difference = ((bearing_from_s1 - self.bearing_deg + 180.0) % 360.0) - 180.0
         return {
@@ -898,6 +1177,13 @@ class Question2Model:
             "bearing_from_s1_deg": float(bearing_from_s1),
             "bearing_difference_deg": float(bearing_difference),
             "source": source,
+            "iterations": None
+            if selected_local_run is None
+            else int(selected_local_run["iterations"]),
+            "function_evaluations": None
+            if selected_local_run is None
+            else int(selected_local_run["function_evaluations"]),
+            "local_run_count": int(len(local_results)),
             "global": None
             if global_result is None
             else {
@@ -1003,7 +1289,10 @@ class Question2Model:
             distance_min = float(np.min(distances))
             distance_max = float(np.max(distances))
         else:
-            distance_min = distance_max = math.nan
+            # An empty level-set estimate has no meaningful distance range.
+            # ``None`` keeps the result JSON standards-compliant while
+            # preserving the distinction from a finite zero distance.
+            distance_min = distance_max = None
         result: dict[str, Any] = {
             "tau": tau_value,
             "threshold": float(threshold),
@@ -1068,18 +1357,40 @@ class Question2Model:
             "relative_difference": float(abs(low_value - high_value) / max(1.0, abs(high_value))),
         }
 
-    def sensitivity(self, grid_size: int | None = None) -> dict[str, Any]:
-        """Run the documented epsilon/power/tau sensitivity sweep."""
+    def sensitivity(
+        self,
+        grid_size: int | None = None,
+        *,
+        use_global_search: bool | None = None,
+        include_candidate_grids: bool = False,
+    ) -> dict[str, Any]:
+        """Run the documented epsilon/power/tau sensitivity sweep.
+
+        Every weight pair is re-optimised.  Candidate-region statistics are
+        reported for every ``tau`` and remain explicitly labelled as regular
+        grid approximations.  ``use_global_search`` is an opt-in override for
+        the per-sweep optimisation configuration; when omitted, the model's
+        configured value is preserved.
+        """
 
         rows: list[dict[str, Any]] = []
         compact_grid = grid_size or min(self.config.candidate_grid, 61)
+        compact_grid = _finite_int(compact_grid, "grid_size")
+        if compact_grid < 11:
+            raise ValueError("sensitivity grid must contain at least 11 points per axis")
+        if use_global_search is None:
+            sweep_use_global = bool(self.config.use_global_search)
+        elif isinstance(use_global_search, (bool, np.bool_)):
+            sweep_use_global = bool(use_global_search)
+        else:
+            raise ValueError("use_global_search must be boolean when supplied")
         reference_eps, reference_power = self.config.epsilon_w, self.config.p_w
         for epsilon in self.config.sensitivity_epsilons:
             for power in self.config.sensitivity_powers:
                 local_config = Q2Config(**asdict(self.config))
                 local_config.epsilon_w = float(epsilon)
                 local_config.p_w = float(power)
-                local_config.use_global_search = False
+                local_config.use_global_search = sweep_use_global
                 local_model = Question2Model(
                     self.s1,
                     self.bearing_deg,
@@ -1089,12 +1400,47 @@ class Question2Model:
                 optimum = local_model.optimize()
                 point = np.asarray(optimum["point"], dtype=float)
                 reference_j = self.objective(point, reference_eps, reference_power)
+                candidate_by_tau: list[dict[str, Any]] = []
                 areas: dict[str, float] = {}
                 # Candidate masks are computed with the same continuous model
                 # and only a smaller reporting grid to keep the sweep tractable.
                 for tau in self.config.sensitivity_taus:
                     region = local_model.candidate_region(optimum, tau=tau, grid_size=compact_grid)
                     areas[f"{float(tau):g}"] = float(region["area"])
+                    accepted_cell_count = int(np.sum(np.asarray(region["mask"], dtype=np.uint8)))
+                    candidate_summary: dict[str, Any] = {
+                        "tau": float(region["tau"]),
+                        "threshold": float(region["threshold"]),
+                        "area": float(region["area"]),
+                        "accepted_cell_count": accepted_cell_count,
+                        "grid_shape": list(region["grid_shape"]),
+                        "x_step": float(region["x_step"]),
+                        "y_step": float(region["y_step"]),
+                        # An empty grid estimate has no distance interval;
+                        # preserve ``None`` so JSON stays standards-compliant
+                        # and downstream plots can distinguish it from zero.
+                        "distance_from_s1_min": region["distance_from_s1_min"],
+                        "distance_from_s1_max": region["distance_from_s1_max"],
+                        "component_count": int(region["component_count"]),
+                        "components": region["components"],
+                    }
+                    if include_candidate_grids:
+                        candidate_summary.update(
+                            {
+                                "x_min": float(region["x_min"]),
+                                "x_max": float(region["x_max"]),
+                                "y_min": float(region["y_min"]),
+                                "y_max": float(region["y_max"]),
+                                "sample_x": region["sample_x"],
+                                "sample_y": region["sample_y"],
+                                "mask": region["mask"],
+                            }
+                        )
+                    candidate_by_tau.append(candidate_summary)
+                local_runs = optimum.get("local_runs", [])
+                local_success_count = sum(bool(run.get("success")) for run in local_runs)
+                local_feasible_count = sum(bool(run.get("feasible")) for run in local_runs)
+                global_summary = optimum.get("global")
                 rows.append(
                     {
                         "epsilon_w": float(epsilon),
@@ -1103,14 +1449,39 @@ class Question2Model:
                         "j_star": float(optimum["j_star"]),
                         "j_under_reference_weight": float(reference_j),
                         "distance_from_s1": float(np.linalg.norm(point - self.s1)),
+                        "bearing_from_s1_deg": float(optimum["bearing_from_s1_deg"]),
                         "bearing_difference_deg": float(optimum["bearing_difference_deg"]),
+                        "reception_h": float(optimum["reception_h"]),
+                        "reception_h_tolerance": float(optimum["reception_h_tolerance"]),
+                        "strict_feasible": bool(optimum["strict_feasible"]),
+                        "feasible_with_tolerance": bool(optimum["feasible_with_tolerance"]),
+                        "optimization_source": str(optimum["source"]),
+                        "use_global_search": sweep_use_global,
+                        "selected_iterations": optimum["iterations"],
+                        "selected_function_evaluations": optimum["function_evaluations"],
+                        "local_run_count": int(optimum["local_run_count"]),
+                        "local_success_count": int(local_success_count),
+                        "local_feasible_count": int(local_feasible_count),
+                        "global": global_summary,
+                        "candidate_by_tau": candidate_by_tau,
                         "candidate_area_by_tau": areas,
                     }
                 )
         return {
+            "reference_weight": {
+                "epsilon_w": float(reference_eps),
+                "p_w": float(reference_power),
+            },
             "epsilon_values": [float(value) for value in self.config.sensitivity_epsilons],
             "p_values": [float(value) for value in self.config.sensitivity_powers],
             "tau_values": [float(value) for value in self.config.sensitivity_taus],
+            "grid_size": int(compact_grid),
+            "use_global_search": sweep_use_global,
+            "grid_approximation": (
+                "Each candidate area, distance range and component count is "
+                "computed from cell centres on the reported regular grid; it "
+                "is not a strict continuous-region measure."
+            ),
             "rows": rows,
         }
 
@@ -1289,7 +1660,10 @@ def _demo_input() -> dict[str, Any]:
 def _write_json(path: str | Path, value: Any) -> None:
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    output.write_text(
+        json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
+        encoding="utf-8",
+    )
 
 
 def main(argv: Sequence[str] | None = None) -> int:

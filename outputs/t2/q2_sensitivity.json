@@ -1,0 +1,3317 @@
+{
+  "model": "question_2_continuous_robust_dop",
+  "input": {
+    "s1": [
+      0.0,
+      0.0
+    ],
+    "svd_deg": 32.0
+  },
+  "config": {
+    "target_radius": 1800.0,
+    "min_receive_radius": 1000.0,
+    "max_receive_radius": 1500.0,
+    "angle_error_deg": 1.0,
+    "circle_sides": 360,
+    "epsilon_w": 0.2,
+    "p_w": 2.0,
+    "tau": 0.05,
+    "quadrature_order": 6,
+    "validation_quadrature_order": 8,
+    "candidate_grid": 101,
+    "seed": 20260911,
+    "use_global_search": false,
+    "global_maxiter": 24,
+    "global_popsize": 7,
+    "local_maxiter": 240,
+    "feasibility_tolerance_m": 1e-06,
+    "angle_sin_tolerance": 1e-10,
+    "sensitivity_epsilons": [
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "sensitivity_powers": [
+      1.0,
+      2.0,
+      3.0
+    ],
+    "sensitivity_taus": [
+      0.01,
+      0.03,
+      0.05,
+      0.1,
+      0.2
+    ]
+  },
+  "geometry": {
+    "target_region_area": 39270.90505841475,
+    "target_region_halfplane_count": 722,
+    "target_region_inradius": 25.729566798698897,
+    "target_region_centroid": [
+      848.0158056982607,
+      529.8990869155382
+    ],
+    "search_bounds": [
+      [
+        -151.9841943017393,
+        1848.0158056982607
+      ],
+      [
+        -470.1009130844618,
+        1529.8990869155382
+      ]
+    ],
+    "quadrature_order": 6,
+    "quadrature_node_count": 180
+  },
+  "sensitivity": {
+    "reference_weight": {
+      "epsilon_w": 0.2,
+      "p_w": 2.0
+    },
+    "epsilon_values": [
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "p_values": [
+      1.0,
+      2.0,
+      3.0
+    ],
+    "tau_values": [
+      0.01,
+      0.03,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "grid_size": 61,
+    "use_global_search": false,
+    "grid_approximation": "Each candidate area, distance range and component count is computed from cell centres on the reported regular grid; it is not a strict continuous-region measure.",
+    "rows": [
+      {
+        "epsilon_w": 0.1,
+        "p_w": 1.0,
+        "point": [
+          475.33899648795176,
+          879.802726981814
+        ],
+        "j_star": 1610.906974829786,
+        "j_under_reference_weight": 1611.118517506248,
+        "distance_from_s1": 999.9999999934047,
+        "bearing_from_s1_deg": 61.6185756512951,
+        "bearing_difference_deg": 29.61857565129509,
+        "reception_h": -1.3185897842049599e-05,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 108,
+        "selected_function_evaluations": 442,
+        "local_run_count": 76,
+        "local_success_count": 33,
+        "local_feasible_count": 47,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1627.0160445780837,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1659.2341840746794,
+            "area": 13974.737973662997,
+            "accepted_cell_count": 13,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 7,
+                "area": 7524.85890889546,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -60.26484751069134,
+                  "y_max": 136.45646396471847
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 988.6259282676077
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 4,
+                "area": 4299.919376511692,
+                "bbox": {
+                  "x_min": 421.78629750153937,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1691.4523235712752,
+            "area": 25799.51625907015,
+            "accepted_cell_count": 24,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 955.8606167108918,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 11,
+                "area": 11824.778285407152,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1771.9976723127647,
+            "area": 65573.7704918033,
+            "accepted_cell_count": 61,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 912.0933518047672,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 32,
+                "area": 34399.35501209353,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -224.19927374019954,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 29,
+                "area": 31174.415479709765,
+                "bbox": {
+                  "x_min": 225.06498602612953,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 912.0933518047672,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1933.088369795743,
+            "area": 167696.85568395598,
+            "accepted_cell_count": 156,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 843.8261005693786,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 78,
+                "area": 83848.42784197799,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -388.1336999697077,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 78,
+                "area": 83848.42784197799,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 684.0813794687524,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 843.8261005693786,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 13974.737973662997,
+          "0.05": 25799.51625907015,
+          "0.1": 65573.7704918033,
+          "0.2": 167696.85568395598
+        }
+      },
+      {
+        "epsilon_w": 0.1,
+        "p_w": 2.0,
+        "point": [
+          472.39531331613136,
+          881.3867869700115
+        ],
+        "j_star": 1661.1641941264384,
+        "j_under_reference_weight": 1611.0157330828372,
+        "distance_from_s1": 1000.0000001441832,
+        "bearing_from_s1_deg": 61.810105827540234,
+        "bearing_difference_deg": 29.81010582754024,
+        "reception_h": 0.0002883709967136383,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": false,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 98,
+        "selected_function_evaluations": 403,
+        "local_run_count": 76,
+        "local_success_count": 33,
+        "local_feasible_count": 50,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1677.7758360677028,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1710.9991199502315,
+            "area": 12899.758129535076,
+            "accepted_cell_count": 12,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 6,
+                "area": 6449.879064767538,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -60.26484751069134,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 4,
+                "area": 4299.919376511692,
+                "bbox": {
+                  "x_min": 421.78629750153937,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1744.2224038327604,
+            "area": 23649.556570814304,
+            "accepted_cell_count": 22,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 955.8606167108918,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 5,
+            "components": [
+              {
+                "cell_count": 11,
+                "area": 11824.778285407152,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 2,
+                "area": 2149.959688255846,
+                "bbox": {
+                  "x_min": 520.1469532392442,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 975.2674467218168,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 6,
+                "area": 6449.879064767538,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 2,
+                "area": 2149.959688255846,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 978.3476166114359,
+                "distance_from_s1_max": 989.6702873066317
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1827.2806135390824,
+            "area": 64498.79064767537,
+            "accepted_cell_count": 60,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 912.0933518047672,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 30,
+                "area": 32249.395323837685,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -224.19927374019954,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 30,
+                "area": 32249.395323837685,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 912.0933518047672,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1993.397032951726,
+            "area": 164471.9161515722,
+            "accepted_cell_count": 153,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 843.8261005693786,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 77,
+                "area": 82773.44799785006,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -388.1336999697077,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 76,
+                "area": 81698.46815372213,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 684.0813794687524,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 843.8261005693786,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 12899.758129535076,
+          "0.05": 23649.556570814304,
+          "0.1": 64498.79064767537,
+          "0.2": 164471.9161515722
+        }
+      },
+      {
+        "epsilon_w": 0.1,
+        "p_w": 3.0,
+        "point": [
+          466.48233956496523,
+          884.5305119459405
+        ],
+        "j_star": 1676.294595918334,
+        "j_under_reference_weight": 1610.9596628929003,
+        "distance_from_s1": 999.9999998446756,
+        "bearing_from_s1_deg": 62.19380122068637,
+        "bearing_difference_deg": 30.193801220686368,
+        "reception_h": -0.0003106441581621766,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 83,
+        "selected_function_evaluations": 337,
+        "local_run_count": 76,
+        "local_success_count": 37,
+        "local_feasible_count": 53,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1693.0575418775172,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1726.583433795884,
+            "area": 12899.758129535076,
+            "accepted_cell_count": 12,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 6,
+                "area": 6449.879064767538,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -60.26484751069134,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 4,
+                "area": 4299.919376511692,
+                "bbox": {
+                  "x_min": 421.78629750153937,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1760.1093257142506,
+            "area": 24724.536414942228,
+            "accepted_cell_count": 23,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 955.8606167108918,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 11,
+                "area": 11824.778285407152,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 2,
+                "area": 2149.959688255846,
+                "bbox": {
+                  "x_min": 520.1469532392442,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 975.2674467218168,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 9,
+                "area": 9674.818597151307,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1843.9240555101674,
+            "area": 67723.73018005914,
+            "accepted_cell_count": 63,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 912.0933518047672,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 32,
+                "area": 34399.35501209353,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 31,
+                "area": 33324.37516796561,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 912.0933518047672,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 2011.5535151020006,
+            "area": 165546.89599570012,
+            "accepted_cell_count": 154,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 843.8261005693786,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 78,
+                "area": 83848.42784197799,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -388.1336999697077,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 76,
+                "area": 81698.46815372213,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 684.0813794687524,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 843.8261005693786,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 12899.758129535076,
+          "0.05": 24724.536414942228,
+          "0.1": 67723.73018005914,
+          "0.2": 165546.89599570012
+        }
+      },
+      {
+        "epsilon_w": 0.2,
+        "p_w": 1.0,
+        "point": [
+          999.3161801539293,
+          36.97528833844554
+        ],
+        "j_star": 1587.0573762425636,
+        "j_under_reference_weight": 1610.990283884381,
+        "distance_from_s1": 999.9999999325757,
+        "bearing_from_s1_deg": 2.1190109974484117,
+        "bearing_difference_deg": -29.880989002551587,
+        "reception_h": -0.00013484375085681677,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 90,
+        "selected_function_evaluations": 370,
+        "local_run_count": 76,
+        "local_success_count": 39,
+        "local_feasible_count": 55,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1602.9279500049893,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1634.6690975298404,
+            "area": 15049.71781779092,
+            "accepted_cell_count": 14,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 7,
+                "area": 7524.85890889546,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -60.26484751069134,
+                  "y_max": 136.45646396471847
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 988.6259282676077
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1666.4102450546918,
+            "area": 26874.49610319807,
+            "accepted_cell_count": 25,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 946.3913521494578,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 946.3764614359656,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 946.3913521494578,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1745.76311386682,
+            "area": 70948.6697124429,
+            "accepted_cell_count": 66,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 912.0933518047672,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 34,
+                "area": 36549.31470034938,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 32,
+                "area": 34399.35501209353,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 912.0933518047672,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1904.4688514910763,
+            "area": 171996.77506046765,
+            "accepted_cell_count": 160,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 838.8008028366213,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 80,
+                "area": 85998.38753023383,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -388.1336999697077,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 80,
+                "area": 85998.38753023383,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 684.0813794687524,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 838.8008028366213,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 15049.71781779092,
+          "0.05": 26874.49610319807,
+          "0.1": 70948.6697124429,
+          "0.2": 171996.77506046765
+        }
+      },
+      {
+        "epsilon_w": 0.2,
+        "p_w": 2.0,
+        "point": [
+          999.4569327707653,
+          32.95207776292434
+        ],
+        "j_star": 1610.954743391885,
+        "j_under_reference_weight": 1610.954743391885,
+        "distance_from_s1": 999.9999999462199,
+        "bearing_from_s1_deg": 1.8883568293514208,
+        "bearing_difference_deg": -30.11164317064859,
+        "reception_h": -0.00010755541734397411,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 50,
+        "selected_function_evaluations": 201,
+        "local_run_count": 76,
+        "local_success_count": 34,
+        "local_feasible_count": 51,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1627.0642908258037,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1659.2833856936415,
+            "area": 13974.737973662997,
+            "accepted_cell_count": 13,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 6,
+                "area": 6449.879064767538,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -60.26484751069134,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1691.5024805614792,
+            "area": 25799.51625907015,
+            "accepted_cell_count": 24,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 955.8606167108918,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 11,
+                "area": 11824.778285407152,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1772.0502177310736,
+            "area": 69873.68986831499,
+            "accepted_cell_count": 65,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 912.0933518047672,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 34,
+                "area": 36549.31470034938,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 31,
+                "area": 33324.37516796561,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 912.0933518047672,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1933.1456920702617,
+            "area": 169846.81537221183,
+            "accepted_cell_count": 158,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 838.8008028366213,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 79,
+                "area": 84923.40768610591,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -388.1336999697077,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 79,
+                "area": 84923.40768610591,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 684.0813794687524,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 838.8008028366213,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 13974.737973662997,
+          "0.05": 25799.51625907015,
+          "0.1": 69873.68986831499,
+          "0.2": 169846.81537221183
+        }
+      },
+      {
+        "epsilon_w": 0.2,
+        "p_w": 3.0,
+        "point": [
+          999.6132039912617,
+          27.810832467689977
+        ],
+        "j_star": 1610.472187573583,
+        "j_under_reference_weight": 1611.0121094719177,
+        "distance_from_s1": 999.9999999981109,
+        "bearing_from_s1_deg": 1.5936488027770046,
+        "bearing_difference_deg": -30.40635119722299,
+        "reception_h": -3.773719072341919e-06,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 54,
+        "selected_function_evaluations": 222,
+        "local_run_count": 76,
+        "local_success_count": 43,
+        "local_feasible_count": 54,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1626.5769094493187,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1658.7863532007905,
+            "area": 15049.71781779092,
+            "accepted_cell_count": 14,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 7,
+                "area": 7524.85890889546,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -93.05173275659297,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1690.995796952262,
+            "area": 26874.49610319807,
+            "accepted_cell_count": 25,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 946.3913521494578,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 946.3764614359656,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 946.3913521494578,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1771.5194063309414,
+            "area": 73098.62940069876,
+            "accepted_cell_count": 68,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 912.0933518047672,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 35,
+                "area": 37624.2945444773,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 33,
+                "area": 35474.33485622145,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 912.0933518047672,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1932.5666250882994,
+            "area": 175221.71459285144,
+            "accepted_cell_count": 163,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 833.102147836819,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 81,
+                "area": 87073.36737436175,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -420.9205852156093,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 82,
+                "area": 88148.34721848968,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 651.2944942228507,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 833.102147836819,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 15049.71781779092,
+          "0.05": 26874.49610319807,
+          "0.1": 73098.62940069876,
+          "0.2": 175221.71459285144
+        }
+      },
+      {
+        "epsilon_w": 0.3,
+        "p_w": 1.0,
+        "point": [
+          999.4395701939592,
+          33.47454999770119
+        ],
+        "j_star": 1569.1083074501134,
+        "j_under_reference_weight": 1610.9553307070937,
+        "distance_from_s1": 999.9999999835172,
+        "bearing_from_s1_deg": 1.9183088085243087,
+        "bearing_difference_deg": -30.0816911914757,
+        "reception_h": -3.296090289950371e-05,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 74,
+        "selected_function_evaluations": 308,
+        "local_run_count": 76,
+        "local_success_count": 35,
+        "local_feasible_count": 57,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1584.7993905246146,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1616.1815566736168,
+            "area": 16124.697661918843,
+            "accepted_cell_count": 15,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 8,
+                "area": 8599.838753023383,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -93.05173275659297,
+                  "y_max": 136.45646396471847
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 988.6259282676077
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1647.5637228226192,
+            "area": 29024.45579145392,
+            "accepted_cell_count": 27,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 946.3913521494578,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 14,
+                "area": 15049.71781779092,
+                "bbox": {
+                  "x_min": 946.3764614359656,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 946.3913521494578,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1726.019138195125,
+            "area": 73098.62940069876,
+            "accepted_cell_count": 68,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 912.0933518047672,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 35,
+                "area": 37624.2945444773,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 33,
+                "area": 35474.33485622145,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 912.0933518047672,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1882.929968940136,
+            "area": 179521.63396936312,
+            "accepted_cell_count": 167,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 833.102147836819,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 83,
+                "area": 89223.3270626176,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -388.1336999697077,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 84,
+                "area": 90298.30690674552,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 684.0813794687524,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 833.102147836819,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 16124.697661918843,
+          "0.05": 29024.45579145392,
+          "0.1": 73098.62940069876,
+          "0.2": 179521.63396936312
+        }
+      },
+      {
+        "epsilon_w": 0.3,
+        "p_w": 2.0,
+        "point": [
+          999.5595424810213,
+          29.676943821172667
+        ],
+        "j_star": 1580.7586749235165,
+        "j_under_reference_weight": 1610.9781174788336,
+        "distance_from_s1": 999.9999999797168,
+        "bearing_from_s1_deg": 1.700613319796637,
+        "bearing_difference_deg": -30.299386680203355,
+        "reception_h": -4.056177567690611e-05,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 103,
+        "selected_function_evaluations": 413,
+        "local_run_count": 76,
+        "local_success_count": 38,
+        "local_feasible_count": 51,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1596.5662616727518,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1628.1814351712221,
+            "area": 15049.71781779092,
+            "accepted_cell_count": 14,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 7,
+                "area": 7524.85890889546,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -93.05173275659297,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1659.7966086696924,
+            "area": 29024.45579145392,
+            "accepted_cell_count": 27,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 946.3913521494578,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 14,
+                "area": 15049.71781779092,
+                "bbox": {
+                  "x_min": 946.3764614359656,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 946.3913521494578,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1738.8345424158683,
+            "area": 73098.62940069876,
+            "accepted_cell_count": 68,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 912.0933518047672,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 35,
+                "area": 37624.2945444773,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 33,
+                "area": 35474.33485622145,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 912.0933518047672,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1896.9104099082197,
+            "area": 177371.6742811073,
+            "accepted_cell_count": 165,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 833.102147836819,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 81,
+                "area": 87073.36737436175,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -388.1336999697077,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 84,
+                "area": 90298.30690674552,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 651.2944942228507,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 833.102147836819,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 15049.71781779092,
+          "0.05": 29024.45579145392,
+          "0.1": 73098.62940069876,
+          "0.2": 177371.6742811073
+        }
+      },
+      {
+        "epsilon_w": 0.3,
+        "p_w": 3.0,
+        "point": [
+          999.6673842274523,
+          25.78993816098984
+        ],
+        "j_star": 1576.6051414811727,
+        "j_under_reference_weight": 1611.0656477432651,
+        "distance_from_s1": 999.9999999992522,
+        "bearing_from_s1_deg": 1.4778184627389241,
+        "bearing_difference_deg": -30.522181537261076,
+        "reception_h": -1.4909310266375542e-06,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 101,
+        "selected_function_evaluations": 404,
+        "local_run_count": 76,
+        "local_success_count": 34,
+        "local_feasible_count": 51,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1592.3711928959844,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1623.903295725608,
+            "area": 15049.71781779092,
+            "accepted_cell_count": 14,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 7,
+                "area": 7524.85890889546,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -93.05173275659297,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1655.4353985552314,
+            "area": 31174.415479709765,
+            "accepted_cell_count": 29,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 946.3913521494578,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 16,
+                "area": 17199.677506046766,
+                "bbox": {
+                  "x_min": 946.3764614359656,
+                  "x_max": 979.1633466818672,
+                  "y_min": -191.4123884942979,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 946.3913521494578,
+                "distance_from_s1_max": 997.6971293705953
+              },
+              {
+                "cell_count": 12,
+                "area": 12899.758129535076,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 955.8606167108918,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1734.2656556292902,
+            "area": 75248.5890889546,
+            "accepted_cell_count": 70,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 898.5995237422981,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 36,
+                "area": 38699.27438860523,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 34,
+                "area": 36549.31470034938,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 898.5995237422981,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1891.9261697774073,
+            "area": 181671.59365761897,
+            "accepted_cell_count": 169,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 825.4111509975174,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 82,
+                "area": 88148.34721848968,
+                "bbox": {
+                  "x_min": 848.0158056982606,
+                  "x_max": 979.1633466818672,
+                  "y_min": -420.9205852156093,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 848.0324235412755,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 87,
+                "area": 93523.24643912929,
+                "bbox": {
+                  "x_min": -4.443210695181946,
+                  "x_max": 651.2944942228507,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 825.4111509975174,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 15049.71781779092,
+          "0.05": 31174.415479709765,
+          "0.1": 75248.5890889546,
+          "0.2": 181671.59365761897
+        }
+      },
+      {
+        "epsilon_w": 0.5,
+        "p_w": 1.0,
+        "point": [
+          999.5948687043739,
+          28.46222864704859
+        ],
+        "j_star": 1543.8885357138988,
+        "j_under_reference_weight": 1610.9985516700835,
+        "distance_from_s1": 999.9999999998357,
+        "bearing_from_s1_deg": 1.6309858374302713,
+        "bearing_difference_deg": -30.369014162569727,
+        "reception_h": -3.241002559661865e-07,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 111,
+        "selected_function_evaluations": 447,
+        "local_run_count": 76,
+        "local_success_count": 42,
+        "local_feasible_count": 56,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1559.3274210710379,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1590.2051917853157,
+            "area": 15049.71781779092,
+            "accepted_cell_count": 14,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 7,
+                "area": 7524.85890889546,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -93.05173275659297,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1621.0829624995938,
+            "area": 32249.395323837685,
+            "accepted_cell_count": 30,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 941.8526320789791,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 16,
+                "area": 17199.677506046766,
+                "bbox": {
+                  "x_min": 946.3764614359656,
+                  "x_max": 979.1633466818672,
+                  "y_min": -158.62550324839626,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 946.3913521494578,
+                "distance_from_s1_max": 993.6821276128812
+              },
+              {
+                "cell_count": 13,
+                "area": 13974.737973662997,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 941.8526320789791,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1698.2773892852888,
+            "area": 77398.54877721045,
+            "accepted_cell_count": 72,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 898.5995237422981,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 37,
+                "area": 39774.25423273315,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 35,
+                "area": 37624.2945444773,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 898.5995237422981,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1852.6662428566785,
+            "area": 188121.4727223865,
+            "accepted_cell_count": 175,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 820.5222834944357,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 88,
+                "area": 94598.22628325722,
+                "bbox": {
+                  "x_min": 815.228920452359,
+                  "x_max": 979.1633466818672,
+                  "y_min": -420.9205852156093,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 820.5222834944357,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 87,
+                "area": 93523.24643912929,
+                "bbox": {
+                  "x_min": 28.343674550719697,
+                  "x_max": 651.2944942228507,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 825.4111509975174,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 15049.71781779092,
+          "0.05": 32249.395323837685,
+          "0.1": 77398.54877721045,
+          "0.2": 188121.4727223865
+        }
+      },
+      {
+        "epsilon_w": 0.5,
+        "p_w": 2.0,
+        "point": [
+          999.6676298710348,
+          25.780412998864445
+        ],
+        "j_star": 1546.1841245440128,
+        "j_under_reference_weight": 1611.0659410682767,
+        "distance_from_s1": 999.9999999531822,
+        "bearing_from_s1_deg": 1.477272529699141,
+        "bearing_difference_deg": -30.52272747030085,
+        "reception_h": -9.363109711557627e-05,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 100,
+        "selected_function_evaluations": 399,
+        "local_run_count": 76,
+        "local_success_count": 42,
+        "local_feasible_count": 55,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1561.645965789453,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1592.5696482803332,
+            "area": 15049.71781779092,
+            "accepted_cell_count": 14,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 7,
+                "area": 7524.85890889546,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -93.05173275659297,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1623.4933307712136,
+            "area": 33324.37516796561,
+            "accepted_cell_count": 31,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 941.8526320789791,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 17,
+                "area": 18274.65735017469,
+                "bbox": {
+                  "x_min": 946.3764614359656,
+                  "x_max": 979.1633466818672,
+                  "y_min": -191.4123884942979,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 946.3913521494578,
+                "distance_from_s1_max": 997.6971293705953
+              },
+              {
+                "cell_count": 13,
+                "area": 13974.737973662997,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 941.8526320789791,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1700.802536998414,
+            "area": 77398.54877721045,
+            "accepted_cell_count": 72,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 898.5995237422981,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 37,
+                "area": 39774.25423273315,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 35,
+                "area": 37624.2945444773,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 898.5995237422981,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1855.4209494528152,
+            "area": 190271.43241064236,
+            "accepted_cell_count": 177,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 817.453389856208,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 89,
+                "area": 95673.20612738514,
+                "bbox": {
+                  "x_min": 815.228920452359,
+                  "x_max": 979.1633466818672,
+                  "y_min": -420.9205852156093,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 817.453389856208,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 88,
+                "area": 94598.22628325722,
+                "bbox": {
+                  "x_min": -4.443210695181946,
+                  "x_max": 651.2944942228507,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 825.4111509975174,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 15049.71781779092,
+          "0.05": 33324.37516796561,
+          "0.1": 77398.54877721045,
+          "0.2": 190271.43241064236
+        }
+      },
+      {
+        "epsilon_w": 0.5,
+        "p_w": 3.0,
+        "point": [
+          999.7205735990527,
+          23.63841621356456
+        ],
+        "j_star": 1542.0754273491536,
+        "j_under_reference_weight": 1611.1415736302868,
+        "distance_from_s1": 999.9999999991524,
+        "bearing_from_s1_deg": 1.3545076474943134,
+        "bearing_difference_deg": -30.6454923525057,
+        "reception_h": -1.6906997188925743e-06,
+        "reception_h_tolerance": 0.001,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 92,
+        "selected_function_evaluations": 366,
+        "local_run_count": 76,
+        "local_success_count": 37,
+        "local_feasible_count": 54,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.01,
+            "threshold": 1557.4961816226453,
+            "area": 1074.979844127923,
+            "accepted_cell_count": 1,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 999.8623275871082,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 1,
+            "components": [
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 454.57318274744097,
+                  "x_max": 454.57318274744097,
+                  "y_min": 890.5548246204561,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 999.8623275871082,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.03,
+            "threshold": 1588.3376901696283,
+            "area": 15049.71781779092,
+            "accepted_cell_count": 14,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 970.7742354904191,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 4,
+            "components": [
+              {
+                "cell_count": 7,
+                "area": 7524.85890889546,
+                "bbox": {
+                  "x_min": 979.1633466818672,
+                  "x_max": 979.1633466818672,
+                  "y_min": -93.05173275659297,
+                  "y_max": 103.66957871881687
+                },
+                "distance_from_s1_min": 979.1777387933479,
+                "distance_from_s1_max": 984.6360957414528
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 552.9338384851459,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 824.9810541286528
+                },
+                "distance_from_s1_min": 993.1412635738888,
+                "distance_from_s1_max": 993.1412635738888
+              },
+              {
+                "cell_count": 5,
+                "area": 5374.899220639614,
+                "bbox": {
+                  "x_min": 388.9994122556377,
+                  "x_max": 487.36006799334257,
+                  "y_min": 857.7679393745544,
+                  "y_max": 890.5548246204561
+                },
+                "distance_from_s1_min": 970.7742354904191,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 356.21252700973605,
+                  "x_max": 356.21252700973605,
+                  "y_min": 923.3417098663577,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 989.6702873066317,
+                "distance_from_s1_max": 989.6702873066317
+              }
+            ]
+          },
+          {
+            "tau": 0.05,
+            "threshold": 1619.1791987166114,
+            "area": 34399.35501209353,
+            "accepted_cell_count": 32,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 941.8526320789791,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 3,
+            "components": [
+              {
+                "cell_count": 18,
+                "area": 19349.637194302613,
+                "bbox": {
+                  "x_min": 946.3764614359656,
+                  "x_max": 979.1633466818672,
+                  "y_min": -191.4123884942979,
+                  "y_max": 169.24334921062007
+                },
+                "distance_from_s1_min": 946.3913521494578,
+                "distance_from_s1_max": 997.6971293705953
+              },
+              {
+                "cell_count": 13,
+                "area": 13974.737973662997,
+                "bbox": {
+                  "x_min": 323.4256417638344,
+                  "x_max": 552.9338384851459,
+                  "y_min": 824.9810541286528,
+                  "y_max": 923.3417098663577
+                },
+                "distance_from_s1_min": 941.8526320789791,
+                "distance_from_s1_max": 999.8623275871082
+              },
+              {
+                "cell_count": 1,
+                "area": 1074.979844127923,
+                "bbox": {
+                  "x_min": 290.6387565179328,
+                  "x_max": 290.6387565179328,
+                  "y_min": 956.1285951122594,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 999.3261615616962,
+                "distance_from_s1_max": 999.3261615616962
+              }
+            ]
+          },
+          {
+            "tau": 0.1,
+            "threshold": 1696.2829700840691,
+            "area": 78473.52862133837,
+            "accepted_cell_count": 73,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 897.4827474508297,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 37,
+                "area": 39774.25423273315,
+                "bbox": {
+                  "x_min": 913.5895761900639,
+                  "x_max": 979.1633466818672,
+                  "y_min": -256.98615898610115,
+                  "y_max": 202.03023445652173
+                },
+                "distance_from_s1_min": 913.6050012923309,
+                "distance_from_s1_max": 999.7885151969849
+              },
+              {
+                "cell_count": 36,
+                "area": 38699.27438860523,
+                "bbox": {
+                  "x_min": 192.27810078022787,
+                  "x_max": 585.7207237310475,
+                  "y_min": 792.1941688827511,
+                  "y_max": 956.1285951122594
+                },
+                "distance_from_s1_min": 897.4827474508297,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          },
+          {
+            "tau": 0.2,
+            "threshold": 1850.4905128189844,
+            "area": 194571.35178715404,
+            "accepted_cell_count": 181,
+            "grid_shape": [
+              61,
+              61
+            ],
+            "x_step": 32.78688524590163,
+            "y_step": 32.78688524590166,
+            "distance_from_s1_min": 817.453389856208,
+            "distance_from_s1_max": 999.8623275871082,
+            "component_count": 2,
+            "components": [
+              {
+                "cell_count": 91,
+                "area": 97823.16581564098,
+                "bbox": {
+                  "x_min": 815.228920452359,
+                  "x_max": 979.1633466818672,
+                  "y_min": -420.9205852156093,
+                  "y_max": 267.60400494832504
+                },
+                "distance_from_s1_min": 817.453389856208,
+                "distance_from_s1_max": 999.8366440898485
+              },
+              {
+                "cell_count": 90,
+                "area": 96748.18597151306,
+                "bbox": {
+                  "x_min": -4.443210695181946,
+                  "x_max": 651.2944942228507,
+                  "y_min": 726.620398390948,
+                  "y_max": 988.9154803581611
+                },
+                "distance_from_s1_min": 823.5446855798261,
+                "distance_from_s1_max": 999.8623275871082
+              }
+            ]
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.01": 1074.979844127923,
+          "0.03": 15049.71781779092,
+          "0.05": 34399.35501209353,
+          "0.1": 78473.52862133837,
+          "0.2": 194571.35178715404
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "purpose": "Question 2 parameter sensitivity for continuous robust second-detector selection",
+    "run_mode": "configured",
+    "smoke_overrides": {},
+    "optimization": {
+      "per_weight_pair_reoptimization": true,
+      "global_search": false,
+      "global_search_parameters": {
+        "maxiter": 24,
+        "popsize": 7,
+        "seed": 20260911
+      },
+      "local_method": "SLSQP with exact geometric reception oracle and finite singularity barrier",
+      "local_maxiter": 240
+    },
+    "comparison_rule": "j_star values use each row's own epsilon_w and p_w. Use j_under_reference_weight for cross-row comparison.",
+    "candidate_region_rule": "R_tau={P: H(P)<=0, J(P)<= (1+tau)J_star, J(P)<infinity}; reported area, distance range and component count are grid estimates.",
+    "grid_rule": "Each candidate area, distance range and component count is computed from cell centres on the reported regular grid; it is not a strict continuous-region measure.",
+    "algorithm_steps": [
+      "Construct the conservative continuous target polygon from the prior circle, first-reception circle and bearing-error wedge.",
+      "Compute polygon depth d(G), maximum inradius d_star and weight epsilon_w+(1-epsilon_w)(d/d_star)^p_w at quadrature nodes.",
+      "Evaluate the weighted continuous DOP integral with triangle Gauss-Duffy quadrature; reject line-polygon collinearity as J=+infinity.",
+      "Use the geometric separation oracle H(P) for the semi-infinite all-target reception constraint.",
+      "Re-optimise each weight pair, then classify near-optimal grid cell centres for every tau.",
+      "Re-evaluate every selected point under the fixed reference weight before comparing weight rows."
+    ]
+  }
+}

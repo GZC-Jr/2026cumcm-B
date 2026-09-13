@@ -1,0 +1,112 @@
+{
+  "experiment": "q3_multi_layout_common_random_numbers",
+  "created_at": "2026-09-13T04:19:30+0800",
+  "description": "问题三多布局本地合成仿真；各布局使用完全相同的seed和目标真值。",
+  "case_count": 3,
+  "seed_start": 2026091301,
+  "seeds": [
+    2026091301,
+    2026091302,
+    2026091303
+  ],
+  "presets": {
+    "ring6_1123": {
+      "ring_points": 6,
+      "ring_radius": 1123.0
+    },
+    "ring7_998": {
+      "ring_points": 7,
+      "ring_radius": 998.0
+    },
+    "ring8_939": {
+      "ring_points": 8,
+      "ring_radius": 939.0
+    },
+    "ring9_904": {
+      "ring_points": 9,
+      "ring_radius": 904.0
+    },
+    "ring10_881": {
+      "ring_points": 10,
+      "ring_radius": 881.0
+    }
+  },
+  "coverage_certificates": {
+    "ring6_1123": {
+      "target_radius_m": 1800.0,
+      "guaranteed_reception_radius_m": 1000.0,
+      "ring_points": 6,
+      "ring_radius_m": 1123.0,
+      "half_sector_angle_deg": 29.999999999999996,
+      "endpoint_distance_bounds_m": {
+        "1000.0": 562.1707419460307,
+        "1800.0": 999.9807486048275
+      },
+      "outer_annulus_distance_bound_m": 999.9807486048275,
+      "whole_domain_bound_m": 1000.0,
+      "certified": true,
+      "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+    },
+    "ring7_998": {
+      "target_radius_m": 1800.0,
+      "guaranteed_reception_radius_m": 1000.0,
+      "ring_points": 7,
+      "ring_radius_m": 998.0,
+      "half_sector_angle_deg": 25.714285714285715,
+      "endpoint_distance_bounds_m": {
+        "1000.0": 444.60110173814377,
+        "1800.0": 999.5014013998122
+      },
+      "outer_annulus_distance_bound_m": 999.5014013998122,
+      "whole_domain_bound_m": 1000.0,
+      "certified": true,
+      "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+    },
+    "ring8_939": {
+      "target_radius_m": 1800.0,
+      "guaranteed_reception_radius_m": 1000.0,
+      "ring_points": 8,
+      "ring_radius_m": 939.0,
+      "half_sector_angle_deg": 22.5,
+      "endpoint_distance_bounds_m": {
+        "1000.0": 382.9820334477891,
+        "1800.0": 999.3190823249832
+      },
+      "outer_annulus_distance_bound_m": 999.3190823249832,
+      "whole_domain_bound_m": 1000.0,
+      "certified": true,
+      "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+    },
+    "ring9_904": {
+      "target_radius_m": 1800.0,
+      "guaranteed_reception_radius_m": 1000.0,
+      "ring_points": 9,
+      "ring_radius_m": 904.0,
+      "half_sector_angle_deg": 20.0,
+      "endpoint_distance_bounds_m": {
+        "1000.0": 343.87750961509175,
+        "1800.0": 999.5400616855433
+      },
+      "outer_annulus_distance_bound_m": 999.5400616855433,
+      "whole_domain_bound_m": 1000.0,
+      "certified": true,
+      "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+    },
+    "ring10_881": {
+      "target_radius_m": 1800.0,
+      "guaranteed_reception_radius_m": 1000.0,
+      "ring_points": 10,
+      "ring_radius_m": 881.0,
+      "half_sector_angle_deg": 18.0,
+      "endpoint_distance_bounds_m": {
+        "1000.0": 316.8586724202754,
+        "1800.0": 999.8950709540933
+      },
+      "outer_annulus_distance_bound_m": 999.8950709540933,
+      "whole_domain_bound_m": 1000.0,
+      "certified": true,
+      "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+    }
+  },
+  "output_structure": "<layout_name>/case_NN/保存每局完整过程文件"
+}

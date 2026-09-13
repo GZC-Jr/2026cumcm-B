@@ -1,0 +1,71 @@
+{
+  "note": "本地随机合成环境，非官方演练；仿真真值只供评估器使用",
+  "layout": {
+    "layout_name": "ring8_939",
+    "base_preset": "ring8_939",
+    "ring_points": 8,
+    "ring_radius": 939.0,
+    "certificate": {
+      "target_radius_m": 1800.0,
+      "guaranteed_reception_radius_m": 1000.0,
+      "ring_points": 8,
+      "ring_radius_m": 939.0,
+      "half_sector_angle_deg": 22.5,
+      "endpoint_distance_bounds_m": {
+        "1000.0": 382.9820334477891,
+        "1800.0": 999.3190823249832
+      },
+      "outer_annulus_distance_bound_m": 999.3190823249832,
+      "whole_domain_bound_m": 1000.0,
+      "certified": true,
+      "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+    }
+  },
+  "seeds": [
+    2026091200
+  ],
+  "cases": [
+    {
+      "layout_name": "ring8_939",
+      "ring_points": 8,
+      "ring_radius": 939.0,
+      "case": 1,
+      "seed": 2026091200,
+      "true_total": 12,
+      "total": 12,
+      "cleared_count": 12,
+      "cleared": 12,
+      "success": true,
+      "status": "complete",
+      "clear_ratio": 1.0,
+      "virtual_time_s": 3200.26079990097,
+      "average_clear_time_s": 266.68839999174753,
+      "distance_m": 12036.303999504853,
+      "measure_count": 120,
+      "failed_clear_attempts": 7,
+      "program_runtime_s": 2.437000000005355,
+      "probe_attempts": 9,
+      "probe_successes": 2,
+      "exact_routes": 25,
+      "approximate_routes": 16,
+      "error": null
+    }
+  ],
+  "summary": {
+    "layout_name": "ring8_939",
+    "ring_points": 8,
+    "ring_radius": 939.0,
+    "case_count": 1,
+    "success_count": 1,
+    "mean_clear_ratio": 1.0,
+    "mean_virtual_time_s": 3200.26079990097,
+    "std_virtual_time_s": 0.0,
+    "pooled_time_per_source_s": 266.68839999174753,
+    "mean_distance_m": 12036.303999504853,
+    "mean_measure_count": 120.0,
+    "mean_program_runtime_s": 2.437000000005355,
+    "failed_clear_attempts": 7
+  },
+  "mean_total_time_s": 3200.26079990097,
+  "pooled_time_per_source_s": 266.68839999174753
+}

@@ -1,0 +1,25 @@
+{
+  "input": "outputs/t2/q2_sensitivity.json",
+  "enhanced_source": "outputs\\t2\\nonexistent",
+  "is_smoke_data": false,
+  "comparison_rule": "j_star values use each row's own epsilon_w and p_w. Use j_under_reference_weight for cross-row comparison.",
+  "files": [
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_advanced_parameter_sweep.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_weight_parameter_heatmaps.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_feasibility_heatmaps.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_tau_candidate_evolution.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_objective_position_tradeoff.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_parameter_sensitivity_tornado.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_convergence_suite.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_convergence_formal_table.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_search_monte_carlo_dashboard.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_geometry_advanced_overlay.png",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_sensitivity_summary.csv",
+    "outputs\\t2\\figures\\advanced_standalone_check_20260913_fix2\\q2_convergence_formal_summary.csv"
+  ],
+  "notes": [
+    "Candidate areas and connected components are numerical grid/marching-squares estimates.",
+    "Strict and tolerance feasibility are reported separately.",
+    "Smoke enhanced data must not be described as a formal global optimum."
+  ]
+}

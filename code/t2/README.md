@@ -7,7 +7,13 @@
 从工作区根目录运行演示：
 
 ```powershell
-python code/t2/solve_q2.py --demo --no-global --output outputs/t2_demo.json
+python code/t2/solve_q2.py --demo --no-global --output outputs/t2/t2_demo.json
+```
+
+正式实验建议把结果写入问题二专用目录：
+
+```powershell
+python code/t2/solve_q2.py --demo --no-global --output outputs/t2/t2_default_noglobal.json
 ```
 
 也可以使用 JSON 输入：
@@ -34,7 +40,7 @@ python code/t2/solve_q2.py --demo --no-global --output outputs/t2_demo.json
 ```
 
 ```powershell
-python code/t2/solve_q2.py --input data/question2.json --output outputs/t2_result.json
+python code/t2/solve_q2.py --input data/question2.json --output outputs/t2/t2_result.json
 ```
 
 输入也接受 `detector` 代替 `s1`，以及 `bearing_deg`、`theta_deg`、`theta` 或 `angle_deg` 代替 `svd_deg`。JSON 中的配置字段与 `Q2Config` 同名；命令行显式给出的参数优先。`--global-search` 与 `--no-global` 是互斥的可选覆盖项，未给出时保留 JSON 配置。
@@ -78,3 +84,90 @@ python code/t2/solve_q2.py --input data/question2.json --output outputs/t2_resul
 ```powershell
 python -m unittest discover -s code/t2 -p "test_*.py"
 ```
+
+## 完整数值实验
+
+`enhanced_experiments.py` 是面向论文的实验入口，逐项重新优化并导出：
+
+- `circle_sides`、积分阶数和候选网格分辨率收敛表；
+- 多随机种子的局部搜索与“差分进化 + 局部搜索”对照；
+- 由 marching squares 提取的近优水平集边界；
+- 目标区域、接收可行域、两个对称候选分支和多个 `tau` 水平集叠加图；
+- 带有测向误差、随机接收半径和双线交会的 Monte Carlo 定位误差/命中率实验。
+
+先用低成本配置检查完整流程：
+
+```powershell
+python code/t2/enhanced_experiments.py `
+  --demo --quick --samples 200 `
+  --output-dir outputs/t2/enhanced_quick
+```
+
+论文规模的示例配置如下（运行时间取决于本机 CPU）：
+
+```powershell
+python code/t2/enhanced_experiments.py `
+  --demo `
+  --circle-values 32,64,128,180,360 `
+  --quadrature-values 3,4,5,6,8 `
+  --grid-values 31,51,81,121,161 `
+  --seeds 0,1,2 `
+  --samples 1000 `
+  --max-local-starts 16 `
+  --local-maxiter 60 `
+  --global-maxiter 8 `
+  --global-popsize 5 `
+  --boundary-grid 161 `
+  --output-dir outputs/t2/enhanced_formal
+```
+
+输出目录中的 `q2_circle_convergence.csv`、`q2_quadrature_convergence.csv`、
+`q2_grid_convergence.csv` 和 `q2_search_comparison.csv` 是可直接制表的原始结果；
+`q2_boundary_contours.csv` 保存 marching-squares 折线，图形位于 `figures/`。
+Monte Carlo 还会写出按种子汇总、跨种子聚合和逐样本明细三个 CSV。
+
+用增强实验包重绘论文级高级敏感度图（参数热力图、收敛表、搜索对照、Monte Carlo
+面板、目标/接收可行域与两个对称分支叠加图，以及综合 dashboard）：
+
+```powershell
+python code/t2/advanced_sensitivity_visualization.py `
+  --input outputs/t2/q2_sensitivity.json `
+  --enhanced-dir outputs/t2/enhanced_formal `
+  --geometry-input outputs/t2/t2_default_noglobal.json `
+  --geometry-grid 161 `
+  --output-dir outputs/t2/figures/advanced
+```
+
+该命令同时导出 `q2_sensitivity_summary.csv`、`q2_convergence_formal_summary.csv` 和
+`q2_advanced_visualization_manifest.json`。manifest 记录实际输入文件、增强实验来源、
+smoke/正式口径和全部图形清单，便于论文图表追溯。
+
+实验说明、指标分母和论文表述见 [`docs/问题二算法落地与实验.md`](../../docs/问题二算法落地与实验.md)。
+
+候选面积仍需标注为数值近似：单元中心面积是栅格估计，只有闭合等值线才使用 marching-squares 多边形面积；被搜索框截断的开放等值线会回退到栅格估计。`strict_feasible`（`H<=0`）与 `feasible_with_tolerance`（允许浮点残差）必须分开报告，不能把数值容差当作严格解析证明。
+
+## 敏感性分析与可视化
+
+`run_sensitivity.py` 复用本目录中的连续模型，对 `epsilon_w`、`p_w` 和 `tau`
+执行参数扫描，同时写出 JSON 和扁平 CSV。默认输出已经指向 `outputs/t2`：
+
+```powershell
+python code/t2/run_sensitivity.py --demo --no-global --output outputs/t2/q2_sensitivity.json
+```
+
+需要快速检查流程时可使用低成本 smoke 配置：
+
+```powershell
+python code/t2/run_sensitivity.py --demo --smoke --no-global --output outputs/t2/sensitivity_smoke.json
+```
+
+`plot_sensitivity.py` 从上述 JSON（也支持同名 CSV）读取结果，并通过共享的
+`tools/visualization/src/mathmodel_viz/styles.py` 配置字体、主题和保存函数：
+
+```powershell
+python code/t2/plot_sensitivity.py --input outputs/t2/q2_sensitivity.json --output-dir outputs/t2/figures
+```
+
+问题二的正式 JSON、CSV 和图形统一放在 `outputs/t2`；历史检查结果放在
+`outputs/t2/archive`。合并前的旧版问题二脚本仅作为参考保存在
+`scratch/archive/q2_legacy`，不再作为运行入口。

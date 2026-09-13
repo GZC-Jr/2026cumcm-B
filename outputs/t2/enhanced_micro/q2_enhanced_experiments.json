@@ -1,0 +1,653 @@
+{
+  "model": "question_2_continuous_robust_dop",
+  "input": {
+    "s1": [
+      0.0,
+      0.0
+    ],
+    "svd_deg": 32.0
+  },
+  "config": {
+    "target_radius": 1800.0,
+    "min_receive_radius": 1000.0,
+    "max_receive_radius": 1500.0,
+    "angle_error_deg": 1.0,
+    "circle_sides": 64,
+    "epsilon_w": 0.2,
+    "p_w": 2.0,
+    "tau": 0.05,
+    "quadrature_order": 4,
+    "validation_quadrature_order": 6,
+    "candidate_grid": 31,
+    "seed": 20260911,
+    "use_global_search": true,
+    "global_maxiter": 1,
+    "global_popsize": 2,
+    "local_maxiter": 12,
+    "feasibility_tolerance_m": 1e-06,
+    "angle_sin_tolerance": 1e-10,
+    "sensitivity_epsilons": [
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "sensitivity_powers": [
+      1.0,
+      2.0,
+      3.0
+    ],
+    "sensitivity_taus": [
+      0.01,
+      0.03,
+      0.05,
+      0.1,
+      0.2
+    ]
+  },
+  "design": {
+    "circle_values": [
+      16
+    ],
+    "quadrature_values": [
+      2
+    ],
+    "grid_values": [
+      11
+    ],
+    "search_seeds": [
+      0
+    ],
+    "max_local_starts": 2,
+    "boundary_grid": 11,
+    "quick": true
+  },
+  "convergence": {
+    "circle_sides": [
+      {
+        "experiment": "circle_sides",
+        "setting": 16,
+        "seed": 0,
+        "use_global_search": false,
+        "circle_sides": 16,
+        "quadrature_order": 4,
+        "candidate_grid": 31,
+        "region_area": 40374.049030207476,
+        "inradius": 26.08111822800487,
+        "point_x": -142.1100231776706,
+        "point_y": 540.6725480006984,
+        "j_star": 3350.0285320514163,
+        "distance_from_s1": 559.0367276388248,
+        "reception_h": -787.7037690243451,
+        "h_tolerance": 0.0010139137506573975,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "source": "local",
+        "branch": "positive_side",
+        "local_run_count": 2,
+        "local_success_count": 1,
+        "local_feasible_count": 1,
+        "selected_iterations": 12,
+        "selected_function_evaluations": 47,
+        "elapsed_s": 0.05663109998567961,
+        "global_objective": null,
+        "global_h": null,
+        "global_feasible": null,
+        "global_iterations": null,
+        "global_function_evaluations": null,
+        "global_branch": null,
+        "native_j_star": 3350.0285320514163,
+        "reference_order": 6,
+        "j_at_reference_order": 3342.1562223113992,
+        "delta_j_native_vs_last": 0.0,
+        "relative_j_native_vs_last": 0.0
+      }
+    ],
+    "quadrature_order": [
+      {
+        "experiment": "quadrature_order",
+        "setting": 2,
+        "seed": 0,
+        "use_global_search": false,
+        "circle_sides": 16,
+        "quadrature_order": 2,
+        "candidate_grid": 31,
+        "region_area": 40374.049030207476,
+        "inradius": 26.08111822800487,
+        "point_x": -142.01939999554713,
+        "point_y": 540.6731038183242,
+        "j_star": 3271.5121293822467,
+        "distance_from_s1": 559.0142352101917,
+        "reception_h": -968.7824417980155,
+        "h_tolerance": 0.0010139137506573975,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "source": "local",
+        "branch": "positive_side",
+        "local_run_count": 2,
+        "local_success_count": 1,
+        "local_feasible_count": 1,
+        "selected_iterations": 12,
+        "selected_function_evaluations": 47,
+        "elapsed_s": 0.0630585000035353,
+        "global_objective": null,
+        "global_h": null,
+        "global_feasible": null,
+        "global_iterations": null,
+        "global_function_evaluations": null,
+        "global_branch": null,
+        "native_j_star": 3271.5121293822467,
+        "reference_order": 2,
+        "j_at_reference_order": 3271.5121293822467,
+        "delta_j_native_vs_last": 0.0,
+        "relative_j_native_vs_last": 0.0
+      }
+    ],
+    "candidate_grid": [
+      {
+        "experiment": "candidate_grid",
+        "grid_size": 11,
+        "tau": 0.05,
+        "threshold": 3435.0877358513594,
+        "cell_center_area": 699054.343765063,
+        "marching_area": 461662.0064307783,
+        "accepted_cell_count": 17,
+        "contour_count": 2,
+        "closed_contour_count": 2,
+        "open_contour_count": 0,
+        "boundary_length": 4036.259730933032,
+        "finite_node_count": 118,
+        "reception_feasible_node_count": 27
+      }
+    ],
+    "final_elapsed_s": 0.05774249997921288
+  },
+  "search_comparison": [
+    {
+      "experiment": "search_comparison",
+      "setting": null,
+      "seed": 0,
+      "use_global_search": false,
+      "circle_sides": 64,
+      "quadrature_order": 4,
+      "candidate_grid": 31,
+      "region_area": 39310.56832539636,
+      "inradius": 25.741366868468162,
+      "point_x": -142.01900108004241,
+      "point_y": 538.2266246977074,
+      "j_star": 3282.5582899432206,
+      "distance_from_s1": 556.6482697370574,
+      "reception_h": -1089.0254896463593,
+      "h_tolerance": 0.0010004669113878332,
+      "strict_feasible": true,
+      "feasible_with_tolerance": true,
+      "source": "local",
+      "branch": "positive_side",
+      "local_run_count": 2,
+      "local_success_count": 1,
+      "local_feasible_count": 1,
+      "selected_iterations": 12,
+      "selected_function_evaluations": 46,
+      "elapsed_s": 0.10219659999711439,
+      "global_objective": null,
+      "global_h": null,
+      "global_feasible": null,
+      "global_iterations": null,
+      "global_function_evaluations": null,
+      "global_branch": null
+    },
+    {
+      "experiment": "search_comparison",
+      "setting": null,
+      "seed": 0,
+      "use_global_search": true,
+      "circle_sides": 64,
+      "quadrature_order": 4,
+      "candidate_grid": 31,
+      "region_area": 39310.56832539636,
+      "inradius": 25.741366868468162,
+      "point_x": 962.5399558732214,
+      "point_y": 206.96178859406987,
+      "j_star": 1751.8224522784797,
+      "distance_from_s1": 984.5386475860048,
+      "reception_h": -30683.651409523096,
+      "h_tolerance": 0.0010004669113878332,
+      "strict_feasible": true,
+      "feasible_with_tolerance": true,
+      "source": "local",
+      "branch": "negative_side",
+      "local_run_count": 3,
+      "local_success_count": 1,
+      "local_feasible_count": 2,
+      "selected_iterations": 12,
+      "selected_function_evaluations": 43,
+      "elapsed_s": 0.19603739999001846,
+      "global_objective": 4882.4414296837795,
+      "global_h": -254132.1850462713,
+      "global_feasible": true,
+      "global_iterations": 1,
+      "global_function_evaluations": 10,
+      "global_branch": "negative_side"
+    }
+  ],
+  "geometry_overlay": {
+    "grid_size": 11,
+    "taus": [
+      0.01,
+      0.05,
+      0.1
+    ],
+    "contours": [
+      {
+        "tau": 0.01,
+        "contour_id": 0,
+        "points": [
+          [
+            895.0935317793869,
+            334.55351795721504
+          ],
+          [
+            918.489434439459,
+            131.77076782573545
+          ],
+          [
+            921.5659003690756,
+            -71.01198230574403
+          ],
+          [
+            920.3033847180428,
+            -273.79473243722356
+          ],
+          [
+            859.8202304951112,
+            -334.27788666015533
+          ],
+          [
+            657.0374803636316,
+            -318.1655773780255
+          ],
+          [
+            454.25473023215204,
+            -276.4789674794357
+          ],
+          [
+            451.57049518993995,
+            -273.79473243722356
+          ],
+          [
+            454.25473023215204,
+            -261.8516576966999
+          ],
+          [
+            551.8905633520352,
+            -71.01198230574403
+          ],
+          [
+            653.4768048627163,
+            131.77076782573545
+          ],
+          [
+            657.0374803636316,
+            134.43852495908015
+          ],
+          [
+            836.7514862452114,
+            334.55351795721504
+          ],
+          [
+            859.8202304951112,
+            369.8268192414908
+          ],
+          [
+            895.0935317793869,
+            334.55351795721504
+          ]
+        ]
+      },
+      {
+        "tau": 0.01,
+        "contour_id": 1,
+        "points": [
+          [
+            317.20178206388437,
+            942.9017683516536
+          ],
+          [
+            454.25473023215204,
+            800.5071127088382
+          ],
+          [
+            657.0374803636316,
+            802.5123195148694
+          ],
+          [
+            719.4307816583271,
+            740.119018220174
+          ],
+          [
+            657.0374803636316,
+            623.8238399899544
+          ],
+          [
+            459.8333490218996,
+            537.3362680886946
+          ],
+          [
+            454.25473023215204,
+            536.9230795305684
+          ],
+          [
+            251.47198010067257,
+            526.0854332632532
+          ],
+          [
+            48.689229969193036,
+            522.9905075973171
+          ],
+          [
+            39.04019784737619,
+            537.3362680886946
+          ],
+          [
+            0.9921680602968763,
+            740.119018220174
+          ],
+          [
+            -10.881227300413599,
+            942.9017683516536
+          ],
+          [
+            48.689229969193036,
+            1002.4722256212603
+          ],
+          [
+            251.47198010067257,
+            1008.6315703148654
+          ],
+          [
+            317.20178206388437,
+            942.9017683516536
+          ]
+        ]
+      },
+      {
+        "tau": 0.05,
+        "contour_id": 0,
+        "points": [
+          [
+            899.1539632586392,
+            334.55351795721504
+          ],
+          [
+            920.7661667014328,
+            131.77076782573545
+          ],
+          [
+            923.6359351882988,
+            -71.01198230574403
+          ],
+          [
+            922.4574532351903,
+            -273.79473243722356
+          ],
+          [
+            859.8202304951112,
+            -336.43195517730277
+          ],
+          [
+            657.0374803636316,
+            -321.48821272795874
+          ],
+          [
+            454.25473023215204,
+            -283.6345838173736
+          ],
+          [
+            444.41487885200206,
+            -273.79473243722356
+          ],
+          [
+            454.25473023215204,
+            -226.59200000235634
+          ],
+          [
+            533.8513058053193,
+            -71.01198230574403
+          ],
+          [
+            647.0285887660821,
+            131.77076782573545
+          ],
+          [
+            657.0374803636316,
+            139.26970783006126
+          ],
+          [
+            832.4128246892599,
+            334.55351795721504
+          ],
+          [
+            859.8202304951112,
+            373.8872507207431
+          ],
+          [
+            899.1539632586392,
+            334.55351795721504
+          ]
+        ]
+      },
+      {
+        "tau": 0.05,
+        "contour_id": 1,
+        "points": [
+          [
+            319.0138651892694,
+            942.9017683516536
+          ],
+          [
+            454.25473023215204,
+            802.6675530248016
+          ],
+          [
+            657.0374803636316,
+            804.5396752457124
+          ],
+          [
+            721.45813738917,
+            740.119018220174
+          ],
+          [
+            657.0374803636316,
+            613.4605695903607
+          ],
+          [
+            483.4630994251663,
+            537.3362680886946
+          ],
+          [
+            454.25473023215204,
+            535.1729075138048
+          ],
+          [
+            251.47198010067257,
+            519.3945640064825
+          ],
+          [
+            48.689229969193036,
+            511.6185156797118
+          ],
+          [
+            32.60473531379759,
+            537.3362680886946
+          ],
+          [
+            -2.074701631116511,
+            740.119018220174
+          ],
+          [
+            -13.096730910023297,
+            942.9017683516536
+          ],
+          [
+            48.689229969193036,
+            1004.68772923087
+          ],
+          [
+            251.47198010067257,
+            1010.4436534402505
+          ],
+          [
+            319.0138651892694,
+            942.9017683516536
+          ]
+        ]
+      },
+      {
+        "tau": 0.1,
+        "contour_id": 0,
+        "points": [
+          [
+            903.5781804259517,
+            334.55351795721504
+          ],
+          [
+            923.2921515155051,
+            131.77076782573545
+          ],
+          [
+            925.9381185506967,
+            -71.01198230574403
+          ],
+          [
+            924.850731770475,
+            -273.79473243722356
+          ],
+          [
+            859.8202304951112,
+            -338.8252337125874
+          ],
+          [
+            657.0374803636316,
+            -325.13394121971965
+          ],
+          [
+            454.25473023215204,
+            -291.2413821697388
+          ],
+          [
+            436.80808049963673,
+            -273.79473243722356
+          ],
+          [
+            454.25473023215204,
+            -182.51742788442704
+          ],
+          [
+            511.3022338719243,
+            -71.01198230574403
+          ],
+          [
+            638.9683186452894,
+            131.77076782573545
+          ],
+          [
+            657.0374803636316,
+            145.3086864187877
+          ],
+          [
+            826.9894977443207,
+            334.55351795721504
+          ],
+          [
+            859.8202304951112,
+            378.3114678880556
+          ],
+          [
+            903.5781804259517,
+            334.55351795721504
+          ]
+        ]
+      },
+      {
+        "tau": 0.1,
+        "contour_id": 1,
+        "points": [
+          [
+            321.03546628997685,
+            942.9017683516536
+          ],
+          [
+            454.25473023215204,
+            805.0677327178682
+          ],
+          [
+            657.0374803636316,
+            806.7955355658095
+          ],
+          [
+            723.7139977092671,
+            740.119018220174
+          ],
+          [
+            657.0374803636316,
+            600.5064815908688
+          ],
+          [
+            513.0002874292495,
+            537.3362680886946
+          ],
+          [
+            454.25473023215204,
+            532.9851924928504
+          ],
+          [
+            251.47198010067257,
+            511.0309774355193
+          ],
+          [
+            48.689229969193036,
+            497.4035257827053
+          ],
+          [
+            25.727699199836906,
+            537.3362680886946
+          ],
+          [
+            -5.448450959402209,
+            740.119018220174
+          ],
+          [
+            -15.556513177338985,
+            942.9017683516536
+          ],
+          [
+            48.689229969193036,
+            1007.1475114981856
+          ],
+          [
+            251.47198010067257,
+            1012.465254540958
+          ],
+          [
+            321.03546628997685,
+            942.9017683516536
+          ]
+        ]
+      }
+    ],
+    "opposite_branch_source": "geometric_reflection",
+    "reception_boundary_level": 0.0010139137506573975
+  },
+  "monte_carlo": {
+    "skipped": true
+  },
+  "metadata": {
+    "strict_vs_tolerance": "strict_feasible means H<=0; feasible_with_tolerance uses the configured distance-scale residual tolerance.",
+    "circle_convergence": "Every circle_sides row reconstructs the target polygon and re-optimises the detector position.",
+    "quadrature_convergence": "Every quadrature_order row re-optimises; j_at_reference_order removes the native-order comparison bias.",
+    "grid_convergence": "Cell-centre area is a raster estimate; marching_area is the sum of closed zero contours, with raster fallback for clipped/open contours.",
+    "boundary_method": "skimage.measure.find_contours (marching squares) on J(P)-(1+tau)J*; H(P)=tolerance is plotted as a separate reception boundary.",
+    "search_comparison": "The same local-start budget is used for every seed; global rows add differential evolution before SLSQP polishing.",
+    "monte_carlo": "Uniform area target sampling and bounded uniform bearing errors are a validation scenario, not a statistical assumption in the mathematical model."
+  }
+}

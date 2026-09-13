@@ -147,6 +147,43 @@ class Question2ModelTests(unittest.TestCase):
         # not agree exactly, but a large discrepancy indicates a broken map.
         self.assertLess(abs(low - high) / high, 0.2)
 
+    def test_batch_reception_oracle_matches_scalar(self) -> None:
+        model = Question2Model([0.0, 0.0], 32.0, self.small_config())
+        points = np.asarray(
+            [
+                [1000.0, 0.0],
+                [700.0, 700.0],
+                [model.region.centroid[0], model.region.centroid[1]],
+                [math.nan, 0.0],
+            ]
+        )
+        batch = model.receive_h_many(points)
+        scalar = np.asarray([model.receive_h(point) for point in points])
+        np.testing.assert_allclose(batch, scalar, rtol=0.0, atol=1e-8, equal_nan=True)
+
+    def test_batch_objective_matches_scalar(self) -> None:
+        model = Question2Model([0.0, 0.0], 32.0, self.small_config())
+        points = np.asarray(
+            [
+                [1000.0, 0.0],
+                [700.0, 700.0],
+                [1200.0, -300.0],
+                [1000.0 * math.cos(math.radians(32.0)), 1000.0 * math.sin(math.radians(32.0))],
+            ]
+        )
+        batch = model.objective_many(points)
+        scalar = np.asarray([model.objective(point) for point in points])
+        np.testing.assert_allclose(batch, scalar, rtol=0.0, atol=1e-8, equal_nan=True)
+
+    def test_optimization_seed_and_local_start_budget_are_reproducible(self) -> None:
+        model = Question2Model([0.0, 0.0], 32.0, self.small_config(local_maxiter=24))
+        first = model.optimize(seed=1234, max_local_starts=3)
+        second = model.optimize(seed=1234, max_local_starts=3)
+        self.assertLessEqual(first["local_run_count"], 3)
+        self.assertEqual(first["local_run_count"], second["local_run_count"])
+        np.testing.assert_allclose(first["point"], second["point"], rtol=0.0, atol=1e-8)
+        self.assertAlmostEqual(first["j_star"], second["j_star"], places=8)
+
     def test_optimization_and_candidate_grid_contracts(self) -> None:
         model = Question2Model([0.0, 0.0], 32.0, self.small_config())
         optimum = model.optimize()

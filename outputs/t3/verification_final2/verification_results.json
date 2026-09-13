@@ -1,0 +1,439 @@
+{
+  "script": "code/t3/verify_t3.py",
+  "official_simulator_test": false,
+  "checks": [
+    {
+      "name": "layout_certificates",
+      "passed": true,
+      "detail": {
+        "preset_count": 5,
+        "presets": [
+          {
+            "layout": "ring6_1123",
+            "ring_points": 6,
+            "ring_radius_m": 1123.0,
+            "outer_bound_m": 999.9807486048275,
+            "whole_domain_bound_m": 1000.0
+          },
+          {
+            "layout": "ring7_998",
+            "ring_points": 7,
+            "ring_radius_m": 998.0,
+            "outer_bound_m": 999.5014013998122,
+            "whole_domain_bound_m": 1000.0
+          },
+          {
+            "layout": "ring8_939",
+            "ring_points": 8,
+            "ring_radius_m": 939.0,
+            "outer_bound_m": 999.3190823249832,
+            "whole_domain_bound_m": 1000.0
+          },
+          {
+            "layout": "ring9_904",
+            "ring_points": 9,
+            "ring_radius_m": 904.0,
+            "outer_bound_m": 999.5400616855433,
+            "whole_domain_bound_m": 1000.0
+          },
+          {
+            "layout": "ring10_881",
+            "ring_points": 10,
+            "ring_radius_m": 881.0,
+            "outer_bound_m": 999.8950709540933,
+            "whole_domain_bound_m": 1000.0
+          }
+        ],
+        "infeasible_layout_rejected": true
+      }
+    },
+    {
+      "name": "scan_boundary_reception",
+      "passed": true,
+      "detail": {
+        "layouts": [
+          {
+            "layout": "ring6_1123",
+            "annulus_endpoints": [
+              {
+                "radial_m": 1000.0,
+                "nearest_distance_m": 562.1707419460307
+              },
+              {
+                "radial_m": 1800.0,
+                "nearest_distance_m": 999.9807486048275
+              }
+            ],
+            "center_edge_distance_m": 1000.0
+          },
+          {
+            "layout": "ring7_998",
+            "annulus_endpoints": [
+              {
+                "radial_m": 1000.0,
+                "nearest_distance_m": 444.60110173814394
+              },
+              {
+                "radial_m": 1800.0,
+                "nearest_distance_m": 999.5014013998122
+              }
+            ],
+            "center_edge_distance_m": 1000.0
+          },
+          {
+            "layout": "ring8_939",
+            "annulus_endpoints": [
+              {
+                "radial_m": 1000.0,
+                "nearest_distance_m": 382.9820334477891
+              },
+              {
+                "radial_m": 1800.0,
+                "nearest_distance_m": 999.3190823249831
+              }
+            ],
+            "center_edge_distance_m": 1000.0
+          },
+          {
+            "layout": "ring9_904",
+            "annulus_endpoints": [
+              {
+                "radial_m": 1000.0,
+                "nearest_distance_m": 343.87750961509187
+              },
+              {
+                "radial_m": 1800.0,
+                "nearest_distance_m": 999.5400616855434
+              }
+            ],
+            "center_edge_distance_m": 1000.0
+          },
+          {
+            "layout": "ring10_881",
+            "annulus_endpoints": [
+              {
+                "radial_m": 1000.0,
+                "nearest_distance_m": 316.85867242027535
+              },
+              {
+                "radial_m": 1800.0,
+                "nearest_distance_m": 999.895070954093
+              }
+            ],
+            "center_edge_distance_m": 1000.0
+          }
+        ],
+        "tested_radius_boundary_m": 1000.0
+      }
+    },
+    {
+      "name": "polygon_contains_truth",
+      "passed": true,
+      "detail": {
+        "true_position": [
+          1100.0,
+          400.0
+        ],
+        "updates": [
+          {
+            "station": [
+              0.0,
+              0.0
+            ],
+            "angle_error_deg": 0.9,
+            "vertex_count": 4,
+            "contains_truth": true
+          },
+          {
+            "station": [
+              939.0,
+              0.0
+            ],
+            "angle_error_deg": -0.9,
+            "vertex_count": 4,
+            "contains_truth": true
+          },
+          {
+            "station": [
+              0.0,
+              939.0
+            ],
+            "angle_error_deg": 0.45,
+            "vertex_count": 4,
+            "contains_truth": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "mec_jung_certificates",
+      "passed": true,
+      "detail": {
+        "polygons": [
+          {
+            "name": "equilateral_triangle",
+            "certificate": {
+              "vertex_count": 3,
+              "diameter_m": 1.7320508075688772,
+              "mec_center": [
+                1.1102230246251565e-16,
+                -1.1102230246251565e-16
+              ],
+              "mec_radius_m": 1.0,
+              "jung_upper_m": 1.0,
+              "jung_ratio": 1.0,
+              "radius_to_diameter": 0.5773502691896258,
+              "jung_certified": true,
+              "numeric_tolerance_m": 1.7320508075688772e-07
+            }
+          },
+          {
+            "name": "square",
+            "certificate": {
+              "vertex_count": 4,
+              "diameter_m": 2.8284271247461903,
+              "mec_center": [
+                0.0,
+                0.0
+              ],
+              "mec_radius_m": 1.4142135623730951,
+              "jung_upper_m": 1.6329931618554523,
+              "jung_ratio": 0.8660254037844386,
+              "radius_to_diameter": 0.5,
+              "jung_certified": true,
+              "numeric_tolerance_m": 2.8284271247461903e-07
+            }
+          },
+          {
+            "name": "rectangle",
+            "certificate": {
+              "vertex_count": 4,
+              "diameter_m": 6.324555320336759,
+              "mec_center": [
+                0.0,
+                0.0
+              ],
+              "mec_radius_m": 3.1622776601683795,
+              "jung_upper_m": 3.651483716701108,
+              "jung_ratio": 0.8660254037844386,
+              "radius_to_diameter": 0.5,
+              "jung_certified": true,
+              "numeric_tolerance_m": 6.324555320336758e-07
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "failed_clear_cache_invalidation",
+      "passed": true,
+      "detail": {
+        "conditioning": {
+          "note": "posterior_conditioned_on_distance_greater_than_20",
+          "mean": [
+            250.67669353253999,
+            100.27452593193233
+          ],
+          "covariance": [
+            [
+              90402.00188121802,
+              -65.75807267696077
+            ],
+            [
+              -65.75807267696148,
+              90540.00992545267
+            ]
+          ]
+        },
+        "quadrature_points": 24576,
+        "mass_inside_failed_20m_disk": 0.0,
+        "cache_rebuilt_lazily": true
+      }
+    },
+    {
+      "name": "local_time_accounting",
+      "passed": true,
+      "detail": {
+        "seed": 2026091399,
+        "true_total": 16,
+        "row": {
+          "layout_name": "ring8_939",
+          "ring_points": 8,
+          "ring_radius": 939.0,
+          "case": 1,
+          "seed": 2026091399,
+          "true_total": 16,
+          "total": 16,
+          "cleared_count": 16,
+          "cleared": 16,
+          "success": true,
+          "status": "complete",
+          "clear_ratio": 1.0,
+          "virtual_time_s": 2942.568145703262,
+          "average_clear_time_s": 183.91050910645387,
+          "distance_m": 11242.840728516305,
+          "measure_count": 98,
+          "failed_clear_attempts": 11,
+          "program_runtime_s": 4.26600000000326,
+          "probe_attempts": 18,
+          "probe_successes": 7,
+          "exact_routes": 22,
+          "approximate_routes": 28,
+          "error": null
+        },
+        "summary_accounting_delta_s": 0.0,
+        "expected_virtual_time_s": 2942.568145703261,
+        "absent_channel_count": 0
+      }
+    },
+    {
+      "name": "protocol_boundaries",
+      "passed": true,
+      "detail": {
+        "rejected_clock_preserved": 17.25,
+        "expired_status": "budget_stop",
+        "expired_paths": [
+          "/enter"
+        ],
+        "normal_paths": [
+          "/enter",
+          "/exit"
+        ]
+      }
+    },
+    {
+      "name": "fallback_failed_clear_feedback",
+      "passed": true,
+      "detail": {
+        "failure_info": {
+          "source": "fallback",
+          "failed_position": [
+            0.0,
+            0.0
+          ],
+          "remaining_fallback_candidates": 1,
+          "note": "posterior_conditioned_on_distance_greater_than_20",
+          "mean": [
+            0.0,
+            0.0
+          ],
+          "covariance": [
+            [
+              2810.3494853264874,
+              0.0
+            ],
+            [
+              0.0,
+              2810.349485326487
+            ]
+          ]
+        },
+        "remaining_fallback": [
+          [
+            60.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "discovered_negative_conditioning",
+      "passed": true,
+      "detail": {
+        "posterior_note": "negative_receive_conditioning",
+        "posterior_mean": [
+          592.1166998772435,
+          603.9438266310757
+        ],
+        "existence_probability": 1.0,
+        "hard_polygon_unchanged": true
+      }
+    },
+    {
+      "name": "degenerate_geometry_regressions",
+      "passed": true,
+      "detail": {
+        "cases": [
+          {
+            "name": "empty",
+            "mec_radius_m": null,
+            "planner_reason": "degenerate_or_empty_polygon"
+          },
+          {
+            "name": "single_point",
+            "mec_radius_m": 0.0,
+            "planner_reason": "degenerate_or_empty_polygon"
+          },
+          {
+            "name": "line_segment",
+            "mec_radius_m": 40.0,
+            "planner_reason": "degenerate_or_empty_polygon"
+          },
+          {
+            "name": "collinear_polygon",
+            "mec_radius_m": 100.0,
+            "planner_reason": "degenerate_or_empty_polygon"
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty_station_narrow_polygon",
+      "passed": true,
+      "detail": {
+        "triangle_count": 64,
+        "posterior_note": "gaussian_moment_projection",
+        "selected_point": [
+          25.0,
+          0.0
+        ],
+        "empty_station_dop": null
+      }
+    },
+    {
+      "name": "strict_reception_boundary",
+      "passed": true,
+      "detail": {
+        "exact_upper_m2": 0.0,
+        "inward_upper_m2": -0.003999998094514012,
+        "outward_upper_m2": 0.003999999957159162,
+        "required_margin_m2": 0.001999999978579581
+      }
+    },
+    {
+      "name": "optimizer_failure_fallbacks",
+      "passed": true,
+      "detail": {
+        "outcomes": {
+          "exception": [
+            5.0,
+            5.0
+          ],
+          "success_false": [
+            5.0,
+            5.0
+          ],
+          "nonfinite_solution": [
+            5.0,
+            5.0
+          ]
+        },
+        "fallback": [
+          5.0,
+          5.0
+        ],
+        "minimize_restored": true
+      }
+    },
+    {
+      "name": "posterior_weight_degeneracy",
+      "passed": true,
+      "detail": {
+        "zero_weight_error": "后验积分权重退化",
+        "degenerate_update_note": "degenerate_mesh_fallback",
+        "empty_map_update_note": "empty_grid_moment_fallback"
+      }
+    }
+  ],
+  "passed": true
+}

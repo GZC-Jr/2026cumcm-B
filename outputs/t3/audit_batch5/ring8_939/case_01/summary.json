@@ -1,0 +1,108 @@
+{
+  "status": "complete",
+  "error": null,
+  "cleared_count": 10,
+  "cleared_channels": [
+    1,
+    2,
+    3,
+    6,
+    7,
+    9,
+    11,
+    13,
+    14,
+    18
+  ],
+  "absent_channels": [
+    4,
+    5,
+    8,
+    10,
+    12,
+    15,
+    16,
+    17,
+    19,
+    20
+  ],
+  "virtual_time_s": 2571.4305048143933,
+  "average_clear_time_s": 257.14305048143933,
+  "program_runtime_s": 1.687999999994645,
+  "distance_m": 8962.152524071966,
+  "measure_count": 121,
+  "switch_count": 115,
+  "clear_attempts": 13,
+  "failed_clear_attempts": 3,
+  "fallback_count": 0,
+  "information_selections": 12,
+  "strategy": "parameterized_ring_rolling_open_route",
+  "layout_name": "ring8_939",
+  "ring_points": 8,
+  "ring_radius": 939.0,
+  "joint_config": {
+    "max_detour_m": 5.0,
+    "horizon": 3,
+    "min_saving_s": 0.0,
+    "candidate_limit": 12
+  },
+  "probe_config": {
+    "max_attempts": 5,
+    "min_probability": 0.2,
+    "max_radius": 80.0
+  },
+  "bayes_config": {
+    "noise_deg": 0.5773502691896258,
+    "quad_depth": 3,
+    "prior_exists": 0.65
+  },
+  "q12_link_config": {
+    "eps_w": 0.2,
+    "p_w": 2.0,
+    "tau": 0.01,
+    "min_dop_improvement": 0.02,
+    "max_primary_loss_ratio": 0.005,
+    "primary_tie_rel_tol": 1e-06,
+    "sin_floor": 0.02,
+    "collinear_sin_tol": 1e-08,
+    "max_collinear_weight_fraction": 0.05,
+    "enable_dop_override": true
+  },
+  "problem1_geometry": {
+    "sample_count": 28,
+    "finite_sample_count": 28,
+    "max_jung_ratio": 0.8666514347981253,
+    "mean_radius_to_diameter": 0.50002132796673,
+    "jung_violation_count": 0
+  },
+  "scheduler": {
+    "search_measures": 103,
+    "localization_measures": 18,
+    "certified_clears": 9,
+    "fallback_clears": 0,
+    "decisions": 30,
+    "probe_attempts": 4,
+    "probe_successes": 1,
+    "joint_sequences_planned": 0,
+    "on_route_probes": 4,
+    "exact_routes": 15,
+    "approximate_routes": 15,
+    "batch_scan_visits": 9,
+    "batch_scan_channels": 113,
+    "route_aligned_plans": 10,
+    "free_measurement_plans": 12,
+    "dop_tie_break_decisions": 12,
+    "dop_tie_break_overrides": 0
+  },
+  "scheduler_config": {
+    "search_gain": 0.2,
+    "lookahead": 1.0,
+    "cell_size": 100.0
+  },
+  "clear_ratio": 1.0,
+  "note": "真实总数仅演练结束后可见；clear_ratio需用实际总数计算。",
+  "accounting_delta_s": 0.0,
+  "true_total": 10,
+  "seed": 2026091401,
+  "case": 1
+}

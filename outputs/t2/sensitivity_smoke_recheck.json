@@ -1,0 +1,169 @@
+{
+  "model": "question_2_continuous_robust_dop",
+  "input": {
+    "s1": [
+      0.0,
+      0.0
+    ],
+    "svd_deg": 32.0
+  },
+  "config": {
+    "target_radius": 1800.0,
+    "min_receive_radius": 1000.0,
+    "max_receive_radius": 1500.0,
+    "angle_error_deg": 1.0,
+    "circle_sides": 32,
+    "epsilon_w": 0.2,
+    "p_w": 2.0,
+    "tau": 0.05,
+    "quadrature_order": 3,
+    "validation_quadrature_order": 4,
+    "candidate_grid": 11,
+    "seed": 20260911,
+    "use_global_search": false,
+    "global_maxiter": 24,
+    "global_popsize": 7,
+    "local_maxiter": 40,
+    "feasibility_tolerance_m": 1e-06,
+    "angle_sin_tolerance": 1e-10,
+    "sensitivity_epsilons": [
+      0.2
+    ],
+    "sensitivity_powers": [
+      2.0
+    ],
+    "sensitivity_taus": [
+      0.05
+    ]
+  },
+  "geometry": {
+    "target_region_area": 39310.56832539652,
+    "target_region_halfplane_count": 66,
+    "target_region_inradius": 25.741366868468162,
+    "target_region_centroid": [
+      848.4489946458378,
+      530.1587915581298
+    ],
+    "search_bounds": [
+      [
+        -152.0179167419949,
+        1848.9159060336706
+      ],
+      [
+        -470.30811982970295,
+        1530.6257029459625
+      ]
+    ],
+    "quadrature_order": 3,
+    "quadrature_node_count": 27
+  },
+  "sensitivity": {
+    "reference_weight": {
+      "epsilon_w": 0.2,
+      "p_w": 2.0
+    },
+    "epsilon_values": [
+      0.2
+    ],
+    "p_values": [
+      2.0
+    ],
+    "tau_values": [
+      0.05
+    ],
+    "grid_size": 11,
+    "use_global_search": false,
+    "grid_approximation": "Each candidate area, distance range and component count is computed from cell centres on the reported regular grid; it is not a strict continuous-region measure.",
+    "rows": [
+      {
+        "epsilon_w": 0.2,
+        "p_w": 2.0,
+        "point": [
+          462.8436658466583,
+          886.4399205938341
+        ],
+        "j_star": 1637.6564582376438,
+        "j_under_reference_weight": 1637.6564582376438,
+        "distance_from_s1": 999.999995918388,
+        "bearing_from_s1_deg": 62.42924303875285,
+        "bearing_difference_deg": 30.429243038752844,
+        "reception_h": -0.00816322339233011,
+        "reception_h_tolerance": 0.0010004669113878326,
+        "strict_feasible": true,
+        "feasible_with_tolerance": true,
+        "optimization_source": "local",
+        "use_global_search": false,
+        "selected_iterations": 40,
+        "selected_function_evaluations": 159,
+        "local_run_count": 76,
+        "local_success_count": 2,
+        "local_feasible_count": 48,
+        "global": null,
+        "candidate_by_tau": [
+          {
+            "tau": 0.05,
+            "threshold": 1719.539281149526,
+            "area": 0.0,
+            "accepted_cell_count": 0,
+            "grid_shape": [
+              11,
+              11
+            ],
+            "x_step": 181.90307479778778,
+            "y_step": 181.90307479778778,
+            "distance_from_s1_min": null,
+            "distance_from_s1_max": null,
+            "component_count": 0,
+            "components": []
+          }
+        ],
+        "candidate_area_by_tau": {
+          "0.05": 0.0
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "purpose": "Question 2 parameter sensitivity for continuous robust second-detector selection",
+    "run_mode": "smoke",
+    "smoke_overrides": {
+      "circle_sides": 32,
+      "quadrature_order": 3,
+      "validation_quadrature_order": 4,
+      "candidate_grid": 11,
+      "local_maxiter": 40,
+      "sensitivity_epsilons": [
+        0.2
+      ],
+      "sensitivity_powers": [
+        2.0
+      ],
+      "sensitivity_taus": [
+        0.05
+      ],
+      "use_global_search": false
+    },
+    "optimization": {
+      "per_weight_pair_reoptimization": true,
+      "global_search": false,
+      "global_search_parameters": {
+        "maxiter": 24,
+        "popsize": 7,
+        "seed": 20260911
+      },
+      "local_method": "SLSQP with exact geometric reception oracle and finite singularity barrier",
+      "local_maxiter": 40
+    },
+    "comparison_rule": "j_star values use each row's own epsilon_w and p_w. Use j_under_reference_weight for cross-row comparison.",
+    "candidate_region_rule": "R_tau={P: H(P)<=0, J(P)<= (1+tau)J_star, J(P)<infinity}; reported area, distance range and component count are grid estimates.",
+    "grid_rule": "Each candidate area, distance range and component count is computed from cell centres on the reported regular grid; it is not a strict continuous-region measure.",
+    "algorithm_steps": [
+      "Construct the conservative continuous target polygon from the prior circle, first-reception circle and bearing-error wedge.",
+      "Compute polygon depth d(G), maximum inradius d_star and weight epsilon_w+(1-epsilon_w)(d/d_star)^p_w at quadrature nodes.",
+      "Evaluate the weighted continuous DOP integral with triangle Gauss-Duffy quadrature; reject line-polygon collinearity as J=+infinity.",
+      "Use the geometric separation oracle H(P) for the semi-infinite all-target reception constraint.",
+      "Re-optimise each weight pair, then classify near-optimal grid cell centres for every tau.",
+      "Re-evaluate every selected point under the fixed reference weight before comparing weight rows."
+    ]
+  }
+}
