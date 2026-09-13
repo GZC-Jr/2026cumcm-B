@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "experiment": "q3_localbackend_monte_carlo",
+  "official_simulator_test": false,
+  "generated_at": "2026-09-13T10:19:45+0800",
+  "layout": {
+    "layout_name": "ring8_939",
+    "base_preset": "ring8_939",
+    "ring_points": 8,
+    "ring_radius": 939.0,
+    "certificate": {
+      "target_radius_m": 1800.0,
+      "guaranteed_reception_radius_m": 1000.0,
+      "ring_points": 8,
+      "ring_radius_m": 939.0,
+      "half_sector_angle_deg": 22.5,
+      "endpoint_distance_bounds_m": {
+        "1000.0": 382.9820334477891,
+        "1800.0": 999.3190823249832
+      },
+      "outer_annulus_distance_bound_m": 999.3190823249832,
+      "whole_domain_bound_m": 1000.0,
+      "certified": true,
+      "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+    }
+  },
+  "seed_start": 2026091320,
+  "seeds": [
+    2026091320
+  ],
+  "edge_fraction": 1.0,
+  "cases": [
+    {
+      "case": 1,
+      "seed": 2026091320,
+      "true_total": 15,
+      "cleared_count": 15,
+      "clear_ratio": 1.0,
+      "success": true,
+      "status": "complete",
+      "virtual_time_s": 4634.338079141482,
+      "time_per_cleared_source_s": 308.95587194276544,
+      "distance_m": 17726.690395707417,
+      "measure_count": 145,
+      "clear_attempts": 68,
+      "failed_clear_attempts": 53,
+      "program_runtime_s": 11.01600000000326,
+      "mean_clear_distance_m": 18.70832418490577,
+      "p95_clear_distance_m": 19.57253745204656,
+      "mean_center_error_m": 3.3224896487775615,
+      "error_hit_rate_20m": 1.0,
+      "error_hit_rate_50m": 1.0,
+      "error_hit_rate_100m": 1.0,
+      "probe_attempts": 53,
+      "probe_successes": 0,
+      "error": null
+    }
+  ],
+  "aggregate": {
+    "case_count": 1,
+    "source_count": 15,
+    "success_count": 1,
+    "success_rate": 1.0,
+    "clear_ratio": {
+      "mean": 1.0,
+      "std": 0.0,
+      "p05": 1.0,
+      "median": 1.0,
+      "p95": 1.0
+    },
+    "virtual_time_s": {
+      "mean": 4634.338079141482,
+      "std": 0.0,
+      "p05": 4634.338079141482,
+      "median": 4634.338079141482,
+      "p95": 4634.338079141482
+    },
+    "time_per_cleared_source_s": {
+      "mean": 308.95587194276544,
+      "std": 0.0,
+      "p05": 308.95587194276544,
+      "median": 308.95587194276544,
+      "p95": 308.95587194276544
+    },
+    "clear_distance_m": {
+      "mean": 18.70832418490577,
+      "std": 0.7475650255582468,
+      "p05": 17.605176256740265,
+      "median": 18.88815310545646,
+      "p95": 19.57253745204656
+    },
+    "center_error_m": {
+      "mean": 3.3224896487775615,
+      "std": 2.447571087647542,
+      "p05": 0.4966779422546236,
+      "median": 2.6035777341327324,
+      "p95": 7.4881731297618686
+    },
+    "hit_rate_clear_distance": {
+      "le_5m": 0.0,
+      "le_20m": 1.0,
+      "le_50m": 1.0,
+      "le_100m": 1.0
+    },
+    "failed_clear_attempts": 53,
+    "mean_measure_count": 145.0,
+    "mean_program_runtime_s": 11.01600000000326
+  },
+  "source_metrics_csv": "source_metrics.csv",
+  "case_metrics_csv": "case_metrics.csv",
+  "limitations": [
+    "LocalBackend is a synthetic offline evaluator and not the official simulator.",
+    "The source truth is used only after each local run to score errors.",
+    "Program runtime is local Python wall time; virtual_time_s is the task cost metric."
+  ]
+}

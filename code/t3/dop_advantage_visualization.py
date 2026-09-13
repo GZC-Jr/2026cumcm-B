@@ -4,7 +4,7 @@
 所有指标均按论文中的公式现场计算，不代表模拟器实测结果。
 
 运行：python3 dop_advantage_visualization.py
-输出：output/dop_advantage_visualization.png
+输出：outputs/t3/dop_advantage_visualization.png
 """
 
 from pathlib import Path
@@ -15,6 +15,26 @@ from matplotlib.lines import Line2D
 from matplotlib.patches import Circle, Ellipse
 from matplotlib.ticker import FuncFormatter
 
+# 导入全局主题配置
+import sys
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tools" / "visualization" / "src"))
+from mathmodel_viz.styles import (
+    configure_matplotlib,
+    get_theme,
+    rgba,
+    rgba_css,
+)
+
+# 应用全局主题
+configure_matplotlib()
+THEME = get_theme()
+
+# 主题颜色别名（便于使用）
+_PRIMARY_BLUE = THEME.primary_blue
+_PRIMARY_RED = THEME.primary_red
+_TRANSITION = THEME.transition
+_FOREGROUND = THEME.foreground
+
 
 DOMAIN_RADIUS = 1800.0
 SPEED = 5.0
@@ -23,7 +43,7 @@ SIGMA_THETA = np.deg2rad(1.0)
 TAU = 0.12
 EPSILON_W = 0.18
 P_W = 2.0
-OUTPUT = Path("output/dop_advantage_visualization.png")
+OUTPUT = Path("../../outputs/t3/dop_advantage_visualization.png")
 
 
 def make_target_samples(mean: np.ndarray, a: float, b: float):
@@ -112,36 +132,37 @@ def main() -> None:
     idx_proposed = int(near_indices[np.argmin(weighted_dop[near_optimal])])
     idx_dop = int(np.argmin(weighted_dop))
 
+    # 使用主题颜色：仅最小化DOP(红)、仅最大化信息(橙)、本文方法(蓝)
     selections = {
-        "仅最小化 DOP": (idx_dop, "#7C3AED", "X"),
-        "仅最大化单位时间信息": (idx_u, "#E76F51", "s"),
-        "本文方法": (idx_proposed, "#09814A", "*"),
+        "仅最小化 DOP": (idx_dop, _PRIMARY_RED, "X"),
+        "仅最大化单位时间信息": (idx_u, _TRANSITION, "s"),
+        "本文方法": (idx_proposed, _PRIMARY_BLUE, "*"),
     }
 
     fig, axes = plt.subplots(1, 2, figsize=(12.6, 6.0), dpi=220,
                              gridspec_kw={"width_ratios": [1.18, 1.0]},
                              constrained_layout=True)
-    fig.patch.set_facecolor("#FBFCFE")
+    fig.patch.set_facecolor(rgba(_PRIMARY_BLUE, 0.02))
 
     # -------------------- A. 候选点空间位置 --------------------
     ax = axes[0]
-    ax.set_facecolor("#F7FAFC")
-    ax.add_patch(Circle((0, 0), DOMAIN_RADIUS, facecolor="#F1F7FA",
-                        edgecolor="#243B53", linewidth=2.0, zorder=0))
+    ax.set_facecolor(rgba(_PRIMARY_BLUE, 0.04))
+    ax.add_patch(Circle((0, 0), DOMAIN_RADIUS, facecolor=rgba(_PRIMARY_BLUE, 0.06),
+                        edgecolor=_FOREGROUND, linewidth=2.0, zorder=0))
     ax.add_patch(Ellipse(mean, 2 * ellipse_a, 2 * ellipse_b,
-                         facecolor="#FDE2CF", edgecolor="#D97745",
-                         linewidth=1.7, alpha=0.72, zorder=2))
-    ax.scatter(candidates[:, 0], candidates[:, 1], s=8, c="#9DB7C8",
-               alpha=0.38, linewidths=0, zorder=1)
+                         facecolor=rgba(_TRANSITION, 0.35), edgecolor=_TRANSITION,
+                         linewidth=1.7, zorder=2))
+    ax.scatter(candidates[:, 0], candidates[:, 1], s=8, c=rgba(_PRIMARY_BLUE, 0.45),
+               linewidths=0, zorder=1)
     ax.scatter(candidates[near_optimal, 0], candidates[near_optimal, 1],
-               s=22, facecolors="none", edgecolors="#2F80C0",
+               s=22, facecolors="none", edgecolors=_PRIMARY_BLUE,
                linewidths=0.9, alpha=0.9, zorder=3)
 
-    ax.scatter(*first_station, s=90, marker="^", c="#4361A6",
+    ax.scatter(*first_station, s=90, marker="^", c=_PRIMARY_BLUE,
                edgecolors="white", linewidths=1.0, zorder=7)
-    ax.scatter(*current, s=100, marker="D", c="#C44536",
+    ax.scatter(*current, s=100, marker="D", c=_PRIMARY_RED,
                edgecolors="white", linewidths=1.0, zorder=7)
-    ax.scatter(*mean, s=70, marker="o", c="#D97745",
+    ax.scatter(*mean, s=70, marker="o", c=_TRANSITION,
                edgecolors="white", linewidths=1.0, zorder=7)
 
     for label, (idx, color, marker) in selections.items():
@@ -151,25 +172,25 @@ def main() -> None:
         ax.scatter(*point, s=130 if marker == "*" else 88, marker=marker,
                    c=color, edgecolors="white", linewidths=1.0, zorder=8)
 
-    ax.set_title("候选点选择：兼顾时间与交会几何", fontsize=13, pad=12, color="#243B53")
+    ax.set_title("候选点选择：兼顾时间与交会几何", fontsize=13, pad=12, color=_FOREGROUND)
     ax.set_xlim(-1900, 1900)
     ax.set_ylim(-1900, 1900)
     ax.set_aspect("equal", adjustable="box")
     ax.set_xlabel("x / m", fontsize=10)
     ax.set_ylabel("y / m", fontsize=10)
-    ax.grid(color="#9FB3C8", lw=0.4, alpha=0.22)
+    ax.grid(color=rgba(_TRANSITION, 0.20), lw=0.4)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
     spatial_legend = [
-        Line2D([0], [0], marker="^", color="none", markerfacecolor="#4361A6",
+        Line2D([0], [0], marker="^", color="none", markerfacecolor=_PRIMARY_BLUE,
                markeredgecolor="white", markersize=8, label="首次检测点"),
-        Line2D([0], [0], marker="D", color="none", markerfacecolor="#C44536",
+        Line2D([0], [0], marker="D", color="none", markerfacecolor=_PRIMARY_RED,
                markeredgecolor="white", markersize=8, label="当前位置"),
-        Line2D([0], [0], marker="o", color="none", markerfacecolor="#D97745",
+        Line2D([0], [0], marker="o", color="none", markerfacecolor=_TRANSITION,
                markeredgecolor="white", markersize=8, label="后验均值"),
         Line2D([0], [0], marker="o", color="none", markerfacecolor="none",
-               markeredgecolor="#2F80C0", markersize=7, label="效用近优集"),
+               markeredgecolor=_PRIMARY_BLUE, markersize=7, label="效用近优集"),
     ]
     for label, (_, color, marker) in selections.items():
         spatial_legend.append(Line2D([0], [0], marker=marker, color="none",
@@ -180,13 +201,13 @@ def main() -> None:
 
     # -------------------- B. 时间—DOP 权衡 --------------------
     ax = axes[1]
-    ax.set_facecolor("#F7FAFC")
+    ax.set_facecolor(rgba(_PRIMARY_BLUE, 0.04))
     sizes = 18 + 70 * normalize(information)
     scatter = ax.scatter(travel_time, weighted_dop, c=utility * 1000.0,
-                         s=sizes, cmap="Blues", alpha=0.58,
+                         s=sizes, cmap=THEME.colormap("blue"), alpha=0.58,
                          edgecolors="none", zorder=2)
     ax.scatter(travel_time[near_optimal], weighted_dop[near_optimal],
-               s=45, facecolors="none", edgecolors="#2F80C0",
+               s=45, facecolors="none", edgecolors=_PRIMARY_BLUE,
                linewidths=0.9, zorder=3)
 
     for _, (idx, color, marker) in selections.items():
@@ -197,14 +218,14 @@ def main() -> None:
     cbar = fig.colorbar(scatter, ax=ax, fraction=0.05, pad=0.025)
     cbar.ax.set_title("单位时间\n信息效用", fontsize=9, pad=7)
     cbar.ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x:.2f}"))
-    ax.set_title("优势一：避免为低 DOP 付出过高时间", fontsize=13, pad=12, color="#243B53")
+    ax.set_title("优势一：避免为低 DOP 付出过高时间", fontsize=13, pad=12, color=_FOREGROUND)
     ax.set_xlabel("移动与测量时间 / s", fontsize=10, labelpad=7)
     ax.set_ylabel("加权 DOP（越低越好）", fontsize=10, labelpad=7)
-    ax.grid(color="#9FB3C8", lw=0.45, alpha=0.28)
+    ax.grid(color=rgba(_TRANSITION, 0.20), lw=0.45)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
-    fig.suptitle("加权 DOP 近优决胜策略的优势", fontsize=16, color="#1F3547", y=1.03)
+    fig.suptitle("加权 DOP 近优决胜策略的优势", fontsize=16, color=_FOREGROUND, y=1.03)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUTPUT, bbox_inches="tight", facecolor=fig.get_facecolor())
     plt.close(fig)
@@ -221,7 +242,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    plt.rcParams["font.family"] = "sans-serif"
-    plt.rcParams["font.sans-serif"] = ["Noto Sans CJK SC"] + list(plt.rcParams["font.sans-serif"])
-    plt.rcParams["axes.unicode_minus"] = False
     main()

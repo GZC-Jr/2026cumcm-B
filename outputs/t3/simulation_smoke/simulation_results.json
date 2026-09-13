@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "experiment": "q3_localbackend_monte_carlo",
+  "official_simulator_test": false,
+  "generated_at": "2026-09-13T09:35:25+0800",
+  "layout": {
+    "layout_name": "ring8_939",
+    "base_preset": "ring8_939",
+    "ring_points": 8,
+    "ring_radius": 939.0,
+    "certificate": {
+      "target_radius_m": 1800.0,
+      "guaranteed_reception_radius_m": 1000.0,
+      "ring_points": 8,
+      "ring_radius_m": 939.0,
+      "half_sector_angle_deg": 22.5,
+      "endpoint_distance_bounds_m": {
+        "1000.0": 382.9820334477891,
+        "1800.0": 999.3190823249832
+      },
+      "outer_annulus_distance_bound_m": 999.3190823249832,
+      "whole_domain_bound_m": 1000.0,
+      "certified": true,
+      "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+    }
+  },
+  "seed_start": 2026091300,
+  "seeds": [
+    2026091300,
+    2026091301,
+    2026091302
+  ],
+  "edge_fraction": 0.0,
+  "cases": [
+    {
+      "case": 1,
+      "seed": 2026091300,
+      "true_total": 11,
+      "cleared_count": 11,
+      "clear_ratio": 1.0,
+      "success": true,
+      "status": "complete",
+      "virtual_time_s": 3318.140477176144,
+      "time_per_cleared_source_s": 301.64913428874036,
+      "distance_m": 12395.70238588072,
+      "measure_count": 126,
+      "clear_attempts": 23,
+      "failed_clear_attempts": 12,
+      "program_runtime_s": 4.062000000005355,
+      "mean_clear_distance_m": 15.525405419218862,
+      "p95_clear_distance_m": 19.07260308635591,
+      "mean_center_error_m": 9.364795923187947,
+      "error_hit_rate_20m": 1.0,
+      "error_hit_rate_50m": 1.0,
+      "error_hit_rate_100m": 1.0,
+      "probe_attempts": 15,
+      "probe_successes": 3,
+      "error": null
+    },
+    {
+      "case": 2,
+      "seed": 2026091301,
+      "true_total": 14,
+      "cleared_count": 14,
+      "clear_ratio": 1.0,
+      "success": true,
+      "status": "complete",
+      "virtual_time_s": 3633.1808799242035,
+      "time_per_cleared_source_s": 259.51291999458596,
+      "distance_m": 14185.904399621018,
+      "measure_count": 115,
+      "clear_attempts": 29,
+      "failed_clear_attempts": 15,
+      "program_runtime_s": 3.9689999999827705,
+      "mean_clear_distance_m": 13.721114456751067,
+      "p95_clear_distance_m": 19.2511084266486,
+      "mean_center_error_m": 5.720642013240366,
+      "error_hit_rate_20m": 1.0,
+      "error_hit_rate_50m": 1.0,
+      "error_hit_rate_100m": 1.0,
+      "probe_attempts": 19,
+      "probe_successes": 4,
+      "error": null
+    },
+    {
+      "case": 3,
+      "seed": 2026091302,
+      "true_total": 15,
+      "cleared_count": 15,
+      "clear_ratio": 1.0,
+      "success": true,
+      "status": "complete",
+      "virtual_time_s": 3302.1936018358288,
+      "time_per_cleared_source_s": 220.14624012238858,
+      "distance_m": 12795.968009179143,
+      "measure_count": 106,
+      "clear_attempts": 28,
+      "failed_clear_attempts": 13,
+      "program_runtime_s": 4.125,
+      "mean_clear_distance_m": 13.404896406563177,
+      "p95_clear_distance_m": 19.504653489724415,
+      "mean_center_error_m": 8.437246878377316,
+      "error_hit_rate_20m": 1.0,
+      "error_hit_rate_50m": 1.0,
+      "error_hit_rate_100m": 1.0,
+      "probe_attempts": 17,
+      "probe_successes": 4,
+      "error": null
+    }
+  ],
+  "aggregate": {
+    "case_count": 3,
+    "source_count": 40,
+    "success_count": 3,
+    "success_rate": 1.0,
+    "clear_ratio": {
+      "mean": 1.0,
+      "std": 0.0,
+      "p05": 1.0,
+      "median": 1.0,
+      "p95": 1.0
+    },
+    "virtual_time_s": {
+      "mean": 3417.838319645392,
+      "std": 152.40929413666572,
+      "p05": 3303.78828936986,
+      "median": 3318.140477176144,
+      "p95": 3601.6768396493976
+    },
+    "time_per_cleared_source_s": {
+      "mean": 260.4360981352383,
+      "std": 33.27982003940144,
+      "p05": 224.08290810960833,
+      "median": 259.51291999458596,
+      "p95": 297.4355128593249
+    },
+    "clear_distance_m": {
+      "mean": 14.098712702609252,
+      "std": 4.723639046974319,
+      "p05": 3.432590402179557,
+      "median": 14.410486846028398,
+      "p95": 19.463243112558498
+    },
+    "center_error_m": {
+      "mean": 7.741511162902308,
+      "std": 8.524409774944225,
+      "p05": 0.5412412717661665,
+      "median": 5.829611387904874,
+      "p95": 18.75773254522822
+    },
+    "hit_rate_clear_distance": {
+      "le_5m": 0.075,
+      "le_20m": 1.0,
+      "le_50m": 1.0,
+      "le_100m": 1.0
+    },
+    "failed_clear_attempts": 40,
+    "mean_measure_count": 115.66666666666667,
+    "mean_program_runtime_s": 4.051999999996042
+  },
+  "source_metrics_csv": "source_metrics.csv",
+  "case_metrics_csv": "case_metrics.csv",
+  "limitations": [
+    "LocalBackend is a synthetic offline evaluator and not the official simulator.",
+    "The source truth is used only after each local run to score errors.",
+    "Program runtime is local Python wall time; virtual_time_s is the task cost metric."
+  ]
+}

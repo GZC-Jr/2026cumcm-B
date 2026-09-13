@@ -1,0 +1,63 @@
+{
+  "layout_name": "custom_n9_R904",
+  "ring_points": 9,
+  "ring_radius": 904.0,
+  "waypoint_count": 10,
+  "waypoints": [
+    [
+      0.0,
+      0.0
+    ],
+    [
+      904.0,
+      0.0
+    ],
+    [
+      692.5041765795561,
+      581.0799991566315
+    ],
+    [
+      156.9779526109051,
+      890.266208723036
+    ],
+    [
+      -451.9999999999998,
+      782.8869650211326
+    ],
+    [
+      -849.4821291904611,
+      309.18620956640467
+    ],
+    [
+      -849.4821291904613,
+      -309.18620956640444
+    ],
+    [
+      -452.0000000000004,
+      -782.8869650211324
+    ],
+    [
+      156.97795261090468,
+      -890.2662087230361
+    ],
+    [
+      692.504176579556,
+      -581.0799991566317
+    ]
+  ],
+  "certificate": {
+    "target_radius_m": 1800.0,
+    "guaranteed_reception_radius_m": 1000.0,
+    "ring_points": 9,
+    "ring_radius_m": 904.0,
+    "half_sector_angle_deg": 20.0,
+    "endpoint_distance_bounds_m": {
+      "1000.0": 343.87750961509175,
+      "1800.0": 999.5400616855433
+    },
+    "outer_annulus_distance_bound_m": 999.5400616855433,
+    "whole_domain_bound_m": 1000.0,
+    "certified": true,
+    "method": "analytic_origin_disk_and_uniform_ring_angular_sectors"
+  }
+}

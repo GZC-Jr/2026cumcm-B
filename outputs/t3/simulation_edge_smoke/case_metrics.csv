@@ -1,0 +1,2 @@
+﻿case,seed,true_total,cleared_count,clear_ratio,success,status,virtual_time_s,time_per_cleared_source_s,distance_m,measure_count,clear_attempts,failed_clear_attempts,program_runtime_s,mean_clear_distance_m,p95_clear_distance_m,mean_center_error_m,error_hit_rate_20m,error_hit_rate_50m,error_hit_rate_100m,probe_attempts,probe_successes,error
+1,2026091320,15,15,1.0,True,complete,4634.338079141482,308.95587194276544,17726.690395707417,145,68,53,11.01600000000326,18.70832418490577,19.57253745204656,3.3224896487775615,1.0,1.0,1.0,53,0,

@@ -1,0 +1,126 @@
+{
+  "seed": 2026091320,
+  "total": 15,
+  "sources": [
+    {
+      "channel": 2,
+      "position": [
+        1465.5488338424198,
+        -1045.067756474729
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 3,
+      "position": [
+        -719.6046482849385,
+        -1649.8997394286448
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 4,
+      "position": [
+        -1799.1863195450192,
+        -54.116425991084306
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 7,
+      "position": [
+        -539.8382534785965,
+        1717.141421106945
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 8,
+      "position": [
+        -857.5209298633148,
+        -1582.611087679584
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 9,
+      "position": [
+        1735.5380932724818,
+        477.3966137292124
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 10,
+      "position": [
+        1708.7250699744527,
+        565.9139821923479
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 12,
+      "position": [
+        1718.39307316289,
+        535.8406909761503
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 14,
+      "position": [
+        1716.174877828545,
+        542.903111715321
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 15,
+      "position": [
+        1600.2533448161282,
+        824.1293784381152
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 16,
+      "position": [
+        1292.7018890923616,
+        -1252.5660964344513
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 17,
+      "position": [
+        1457.0806105974527,
+        -1056.842511550777
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 18,
+      "position": [
+        -1728.3458507302582,
+        -502.81270893196387
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 19,
+      "position": [
+        481.15583252936733,
+        -1734.4996583519328
+      ],
+      "reception_radius_m": 1000
+    },
+    {
+      "channel": 20,
+      "position": [
+        -145.22604987544435,
+        1794.1319333977574
+      ],
+      "reception_radius_m": 1000
+    }
+  ]
+}
